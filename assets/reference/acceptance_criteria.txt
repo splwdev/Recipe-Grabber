@@ -1,0 +1,32 @@
+recipie grabber
+
+enter meal you want and api finds recipie and images from separate API calls
+
+
+variation - enter ingredients you have - find a recipie to make with what you have
+
+
+as a bloke trying to cook dinner from whats in the cupboard
+when the meal is defined
+then it looks and tastes desirable
+
+use local storage so that users can recall past recipie searches.
+
+do readme - Ben
+
+Wireframe - Toby
+
+repo - shayne
+
+
+future enhancments
+
+adding options to restict by allergy
+
+gluten free
+garlic
+vegy
+vegan
+organic
+other things I cant think of right now
+
