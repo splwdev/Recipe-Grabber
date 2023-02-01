@@ -17,11 +17,11 @@ $.ajax({
     console.log(response)
 })
 
-// var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE"
-// var imageURL = 'https://api.unsplash.com/search/photos/?query=Lasagna&client_id=' + APIKeyUnsplash;
-// $.ajax({
-//     url: imageURL,
-//     method: 'GET'
-// }).then(function(response) {
-//     console.log(response)
-// })
+var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE"
+var imageURL = 'https://api.unsplash.com/search/photos/?query=Lasagna&client_id=' + APIKeyUnsplash;
+$.ajax({
+    url: imageURL,
+    method: 'GET'
+}).then(function(response) {
+    console.log(response)
+})
