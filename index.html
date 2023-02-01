@@ -12,73 +12,65 @@
 </head>
 <body>
     <header>
-        <section class="hero bg-primary">
+        <section class="hero bg-primary pt-3">
             <div class="hero-head">
-                <div class="container">
+                <div class="container pb-3">
+                  <div class="is-pulled-right">
+                    <button id="saved-recipes" class="button is-rounded tooltip-page-top" type="button">
+                      <span>Saved Recipes</span>
+                    </button>
+                  </div>
                     <!--Hero Banner Titles-->
+                  <div class="hero-banner pt-3">
                     <h1 class="title is-1">Recipe Grabber for Bloke's <i id="cutlery" class="fa fa-cutlery"></i></h1>
                     <h4 class="title is-4 text-center">An application to help you to decide what to cook when you're all out of ideas</h4>
                     <h4 id="message" class="title is-4"></h4>
+                  </div>
                 </div>
             </div>
         </section>
     </header>
-    <hero  id="search-form">
-        <div class="content">
-            <form id="search-bar" class="field is-clearfix is-mobile is-in-search">
-                <div class="field has-addons">
-                    <div class="control is-expanded has-icons-left">
-                        <input id="search-text" class="input is-medium is-rounded" type="text" placeholder="Search for a recipe...">
-                        <span class="icon is-small is-left">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </div>
-                    <div class="control">
-                        <button type="submit" id="search" class="button is-info is-medium is-rounded">
-                            Search
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </hero>
     <main class="container-fluid">
-        <div class="row">
-        <aside id="ingredients" class="col-lg-4 pb-3 aside">
-            <form id="" class="">
-                <div class="title is-6">
-                    <div class="field columns">
-                        <section class="column">
-                            <p>Search by Ingredients</p>
-                            <div class="field">
-                                <p class="control has-icons-left">
-                                    <input id="include-ingredients" class="input is-rounded" type="text" placeholder="Available Ingredients">
-                                    <span class="icon is-small is-left">
-                                        <i class="fa fa-plus"></i>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="list-group" id="ingredient-storage">
-                            <button class="btn btn-success" id="ingredientBtn">Add Ingredients</button>
-                        </div>
-                        </section>
-                        
-                        <hr class="hr weather-hr" />
-                        <section class="list-group" id="ingredients-list">
-                            
-                        </section>
+      <div id="search-form">
+          <div class="content">
+              <form id="search-bar" class="field is-clearfix is-mobile is-in-search">
+                  <div class="field has-addons">
+                    <div class="control is-expanded has-icons-left">
+                          <input id="api-key" class="input is-medium is-rounded" type="text" placeholder="Enter Spoonacular API Key here...">
+                          <span class="icon is-small is-left">
+                              <i class="fa fa-key"></i>
+                          </span>
                     </div>
-                </div>
-            </form>
-        </aside>
-        <section class="container col-lg-8 pb-3">
-            <div class="row" id="recipe">
-                <h1>This is filler info</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sapiente, quia culpa maiores nemo est deserunt? Harum delectus deserunt culpa minus, sed quam iste. Unde corrupti vitae nihil pariatur? Illum.</p>
+                      <div class="control is-expanded has-icons-left">
+                          <input id="search-text" class="input is-medium is-rounded" type="text" placeholder="Search for a recipe...">
+                          <span class="icon is-small is-left">
+                              <i class="fa fa-search"></i>
+                          </span>
+                      </div>
+                      <div class="control">
+                          <button type="submit" id="search" class="button is-info is-medium is-rounded">
+                              Search
+                          </button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="row">
+        <section class="container pb-3">
+            <div class="row" id="recipe-title">
+                <h1 class="title is-4 text-dark">Recipe List</h1>
+                <hr>
+            </div>
+            <div id="recipe-display">
+                <p>Possible element to contain list of recipes when searched. Each meal could be displayed in a bootstrap card. All to be created as part of dom manipulation / jQuery</p>
             </div>
         </section>
     </div>
     </main>
+    <footer>
+      
+    </footer>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>

@@ -3,11 +3,10 @@ html {
     margin-right: auto;
     margin-left: auto;
     padding: 0px;
-    font-family: 'Be Vietnam', sans-serif;
     overflow-x: hidden;
 }
 
-button, input, #profiles>section, #histories>section {
+button, input {
     cursor: pointer;
 }
 
@@ -81,8 +80,4 @@ h4 {
     margin-bottom: 2px;
     margin-left: -4px;
     text-align: center;
-}
-
-#recipe {
-    color: #000;
 }
