@@ -4,15 +4,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Recipe Grabber for Bloke's</title>
 </head>
 <body>
+    <header>
+        <section class="hero bg-primary">
+            <div class="hero-head">
+                <div class="container">
+                    <!--Hero Banner Titles-->
+                    <h1 class="title is-1">Recipe Grabber for Bloke's <i id="cutlery" class="fa fa-cutlery"></i></h1>
+                    <h4 class="title is-4 text-center">An application to help you to decide what to cook when you're all out of ideas</h4>
+                    <h4 id="message" class="title is-4"></h4>
+                </div>
+            </div>
+        </section>
+    </header>
+    <hero  id="search-form">
+        <div class="content">
+            <form id="search-bar" class="field is-clearfix is-mobile is-in-search">
+                <div class="field has-addons">
+                    <div class="control is-expanded has-icons-left">
+                        <input id="search-text" class="input is-medium is-rounded" type="text" placeholder="Search for a recipe...">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                    <div class="control">
+                        <button type="submit" id="search" class="button is-info is-medium is-rounded">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </hero>
+    <main class="container-fluid">
+        <div class="row">
+        <aside id="ingredients" class="col-lg-4 pb-3 aside">
+            <form id="" class="">
+                <div class="title is-6">
+                    <div class="field columns">
+                        <section class="column">
+                            <p>Search by Ingredients</p>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input id="include-ingredients" class="input is-rounded" type="text" placeholder="Available Ingredients">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="list-group" id="ingredient-storage">
+                            <button class="btn btn-success" id="ingredientBtn">Add Ingredients</button>
+                        </div>
+                        </section>
+                        
+                        <hr class="hr weather-hr" />
+                        <section class="list-group" id="ingredients-list">
+                            
+                        </section>
+                    </div>
+                </div>
+            </form>
+        </aside>
+        <section class="container col-lg-8 pb-3">
+            <div class="row" id="recipe">
+                <h1>This is filler info</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sapiente, quia culpa maiores nemo est deserunt? Harum delectus deserunt culpa minus, sed quam iste. Unde corrupti vitae nihil pariatur? Illum.</p>
+            </div>
+        </section>
+    </div>
+    </main>
     
-
-    <script
-  src="https://code.jquery.com/jquery-3.6.3.js"
-  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
