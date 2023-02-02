@@ -69,12 +69,13 @@ function getRecipes() {
       //log(response.results[i].image);
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
       var recipeImage = $("<img>").attr("src", response.results[i].image);
-      var header = $("<div>").addClass("card-header");
-      var headerTitle = $("<h5>")
-        .text(response.results[i].title)
-        .addClass("card-title text-dark");
+      var header = $("<div>").addClass("card-header h-100");
+      var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
+      var getRecipe = $("<button>")
+        .addClass("get-recipe button is-primary")
+        .text("Get Recipe");
       $(header).append(headerTitle);
-      $(recipeCard).append(header, recipeImage);
+      $(recipeCard).append(header, recipeImage, getRecipe);
       $(resultCardRow).append(recipeCard);
     }
   });
