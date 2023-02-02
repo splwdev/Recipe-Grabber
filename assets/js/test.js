@@ -3,33 +3,51 @@ var apiKeyInput = $("#api-key");
 var searchInput = $("#search-text");
 var searchBtn = $("#search-button");
 var recipeDisplay = $("#recipe-display");
+var saveModal = $("#saved-modal");
 var apiKey = "";
 var recipeArr = [];
 var savedRecipes = localStorage.getItem("savedRecipes");
 var recipeSearch = "";
 
-
+// event handler for searchBtn
 $(searchBtn).on("click", function (event) {
     event.preventDefault();
     apiKey = $(apiKeyInput).val();
-    console.log(apiKey);
     recipeSearch = $(searchInput).val();
-    console.log(recipeSearch);
     recipeArr.push(recipeSearch);
-    console.log(recipeArr);
     localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
     getRecipes();
     searchInput.val("");
-}) 
+});
 
+// event handler for savedRecipesBtn, opens modal with saved recipes
+// still need to work on button to save recipes
+$(savedRecipesBtn).on("click", function (event) {
+  event.preventDefault();
+  $(saveModal).addClass("is-active");
+  var myRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+  if (myRecipes == null) return;
+  $("#recipes").empty();
+  myRecipes.forEach(function(savedRecipes) {
+    var result = $("<section>").addClass("recipe-item").val(JSON.stringify(savedRecipes[1]));
+    result.append($("<h2>").addClass("has-text-black is-size-4 pt-3").text(savedRecipes[0]));
+    $("#recipes").append(result);
+  });
+});
+
+// event handler to close modal
+$(".close-modal").on("click", function () {
+  $("#saved-modal").removeClass("is-active");
+});
+
+// function to get recipes and place them in cards
+// currently only using spoonacular, need to incorporate unsplash for images instead
 function getRecipes() {
     const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
     $.ajax({
       url: recipeIdSearch,
       method: "GET",
     }).then(function (response) {
-        console.log(response);
-
         var resultCard = $("<div>").addClass("card result-card");
         var resultBody = $("<div>").addClass("card-body");
         var resultCardRow = $("<div>").addClass("row justify-content-center");
@@ -42,9 +60,9 @@ function getRecipes() {
             var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
             var recipeImage = $("<img>").attr("src", response.results[i].image);
             var header = $("<div>").addClass("card-header");
-            var headerTitle = $("<h5>").text(response.results[i].title);
+            var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
             $(header).append(headerTitle);
-            $(recipeCard).append(recipeImage, header);
+            $(recipeCard).append(header, recipeImage);
             $(resultCardRow).append(recipeCard);
         }
     });
