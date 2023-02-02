@@ -57,12 +57,13 @@ function getRecipes() {
         for (i = 0; i < response.results.length; i++) {
             console.log(response.results[i].title);
             console.log(response.results[i].image);
-            var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
+            var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card h-100");
             var recipeImage = $("<img>").attr("src", response.results[i].image);
             var header = $("<div>").addClass("card-header");
             var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
+            var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
             $(header).append(headerTitle);
-            $(recipeCard).append(header, recipeImage);
+            $(recipeCard).append(header, recipeImage, getRecipe);
             $(resultCardRow).append(recipeCard);
         }
     });
