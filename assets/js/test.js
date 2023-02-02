@@ -65,17 +65,17 @@ function getRecipes() {
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
     for (i = 0; i < response.results.length; i++) {
-      //console.log(response.results[i].title);
+      console.log(response.results[i].sourceUrl);
       //log(response.results[i].image);
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
-      var recipeImage = $("<img>").attr("src", response.results[i].image);
+      var recipeLink = $("<a>").attr("href", response.results[i].sourceUrl);
+      var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
-      var getRecipe = $("<button>")
-        .addClass("get-recipe button is-primary")
-        .text("Get Recipe");
+      var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
       $(header).append(headerTitle);
-      $(recipeCard).append(header, recipeImage, getRecipe);
+      $(recipeLink).append(recipeImage);
+      $(recipeCard).append(header, recipeLink, getRecipe);
       $(resultCardRow).append(recipeCard);
     }
   });
@@ -85,11 +85,7 @@ function getRecipes() {
 function unsplashImg() {
   var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE";
   recipeSearch = $(searchInput).val();
-  var imageURL =
-    "https://api.unsplash.com/search/photos/?query=" +
-    recipeSearch +
-    "&client_id=" +
-    APIKeyUnsplash;
+  var imageURL ="https://api.unsplash.com/search/photos/?query=" + recipeSearch + "&client_id=" + APIKeyUnsplash;
 
   $.ajax({
     url: imageURL,
