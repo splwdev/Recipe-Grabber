@@ -101,3 +101,13 @@ function unsplashImg() {
   });
 
 }
+// dark light mode favicon change
+const faviconTag = document.getElementById("faviconTag");
+const isDark = window.matchMedia("(prefers-color-scheme: dark)");
+const changefavicon = () => {
+if (isDark.matches) faviconTag.href = "./assets/images/light.svg";
+else faviconTag.href = "./assets/images/dark.svg";
+};
+// change favicon when theme mode changes 
+changefavicon();
+isDark.addEventListener("change", changefavicon);  
