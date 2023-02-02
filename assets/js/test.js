@@ -98,4 +98,5 @@ function unsplashImg() {
     console.log(backgroundURL)
     $("main").css("background", "transparent url('"+backgroundURL+"') no-repeat center center fixed");
   });
+
 }
