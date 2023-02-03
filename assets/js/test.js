@@ -26,8 +26,6 @@ $(searchBtn).on("click", function (event) {
   apiKey = $(apiKeyInput).val();
   recipeSearch = $(searchInput).val();
   // console.log(recipeSearch);
-  recipeArr.push(recipeSearch);
-  localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
   getRecipes();
   searchInput.val("");
 });
@@ -41,12 +39,8 @@ $(savedRecipesBtn).on("click", function (event) {
   if (myRecipes == null) return;
   $("#recipes").empty();
   myRecipes.forEach(function (savedRecipes) {
-    var result = $("<section>")
-      .addClass("recipe-item")
-      .val(JSON.stringify(savedRecipes[1]));
-    result.append(
-      $("<h2>").addClass("has-text-black is-size-4 pt-3").text(savedRecipes[0])
-    );
+    var result = $("<section>").addClass("recipe-item").val(JSON.stringify(savedRecipes));
+    result.append($("<h2>").addClass("has-text-black is-size-4 pt-3").text(savedRecipes));
     $("#recipes").append(result);
   });
 });
@@ -56,9 +50,19 @@ $(".close-modal").on("click", function () {
   $("#saved-modal").removeClass("is-active");
 });
 
+// event handler to add saved recipe to local storage
+$(recipeDisplay).on("click", ".save-recipe", function () {
+  localStorage.getItem("savedRecipes");
+  var recipeTitle = $(this).closest(".card").find(".card-title").text();
+  console.log(recipeTitle);
+  recipeArr.push(recipeTitle);
+  localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
+});
+
 // function to get recipes and place them in cards
 // currently only using spoonacular, need to incorporate unsplash for images instead
 function getRecipes() {
+  recipeArr = [];
   const recipeIdSearch =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
     recipeSearch +
@@ -83,10 +87,10 @@ function getRecipes() {
       var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
-      var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
+      var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Save Recipe");
       $(header).append(headerTitle);
       $(recipeLink).append(recipeImage);
-      $(recipeCard).append(header, recipeLink, getRecipe);
+      $(recipeCard).append(header, recipeLink, saveRecipe);
       $(resultCardRow).append(recipeCard);
     }
   });
