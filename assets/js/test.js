@@ -62,6 +62,8 @@ $(recipeDisplay).on("click", ".save-recipe", function () {
 // function to get recipes and place them in cards
 // currently only using spoonacular, need to incorporate unsplash for images instead
 function getRecipes() {
+  $("#recipe-display").empty();
+  $("#recipe").empty();
   recipeArr = [];
   const recipeIdSearch =
     "https://api.spoonacular.com/recipes/complexSearch?query=" +
@@ -73,13 +75,17 @@ function getRecipes() {
     url: recipeIdSearch,
     method: "GET",
   }).then(function (response) {
+    console.log(response);
     var resultCard = $("<div>").addClass("card result-card");
     var resultBody = $("<div>").addClass("card-body");
     var resultCardRow = $("<div>").addClass("row justify-content-center");
     $(resultBody).append(resultCardRow);
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
-
+    if(response.totalResults === 0){
+      $(".card-body").text("No results -  Please try another search" );
+      return;
+    }
     for (i = 0; i < response.results.length; i++) {
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
       //var recipeTitle = $("<a>").attr("id", response.results[i].title.replaceAll(' ', '-'));
