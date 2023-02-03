@@ -12,13 +12,13 @@ var recipeSearch = "";
 // dark light mode favicon change
 const faviconTag = document.getElementById("faviconTag");
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
-const changefavicon = () => {
+const changeFavicon = () => {
 if (isDark.matches) faviconTag.href = "./assets/images/light.svg";
 else faviconTag.href = "./assets/images/dark.svg";
 };
 // change favicon when theme mode changes 
-changefavicon();
-isDark.addEventListener("change", changefavicon);  
+changeFavicon();
+isDark.addEventListener("change", changeFavicon);  
 
 // event handler for searchBtn
 $(searchBtn).on("click", function (event) {
