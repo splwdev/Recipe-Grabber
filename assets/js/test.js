@@ -86,18 +86,15 @@ function getRecipes() {
       var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
-<<<<<<< HEAD
       var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Save Recipe");
       $(header).append(headerTitle);
       $(recipeLink).append(recipeImage);
       $(recipeCard).append(header, recipeLink, saveRecipe);
-=======
       var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
 
       $(header).append(headerTitle);
       $(recipeTitle).append(recipeImage);
       $(recipeCard).append(header, recipeTitle, getRecipe);
->>>>>>> 218efe6 (displays recipe instructions at the bottom of page)
       $(resultCardRow).append(recipeCard);
 
       recipeCard.click(function(e) {
