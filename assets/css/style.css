@@ -6,16 +6,17 @@ html {
     overflow-x: hidden;
 }
 
-main {
+/* main {
     -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background: rgba(0, 0, 0, 0.3)
-}
+} */
 
 button, input {
     cursor: pointer;
+    background-position: center;
 }
 
 form {

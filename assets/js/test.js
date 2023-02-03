@@ -79,19 +79,39 @@ function getRecipes() {
     $(resultBody).append(resultCardRow);
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
+
     for (i = 0; i < response.results.length; i++) {
-      console.log(response.results[i].sourceUrl);
-      //log(response.results[i].image);
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
-      var recipeLink = $("<a>").attr("href", response.results[i].sourceUrl);
+      //var recipeTitle = $("<a>").attr("id", response.results[i].title.replaceAll(' ', '-'));
       var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
       var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Save Recipe");
       $(header).append(headerTitle);
-      $(recipeLink).append(recipeImage);
-      $(recipeCard).append(header, recipeLink, saveRecipe);
+      //$(recipeTitle).append(recipeImage);
+      $(recipeCard).append(header, recipeImage, saveRecipe);
+      //var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
+
+      //$(recipeTitle).append(recipeImage);
       $(resultCardRow).append(recipeCard);
+
+      recipeCard.click(function(e) {
+        $('#recipe').empty();
+        var recipe = $('<h1>');
+        recipe.text(e.currentTarget.firstChild.innerText);
+        $('#recipe').append(recipe);
+        for(i = 0; i < 10; i++) {
+          if(response.results[i].title === e.currentTarget.firstChild.innerText) {
+            var recipeLength = response.results[i].analyzedInstructions[0].steps.length
+
+            for (k = 0; k < recipeLength; k++) {
+             var recipeSteps = $('<p>');
+             recipeSteps.text(k + 1 + ".) " + response.results[i].analyzedInstructions[0].steps[k].step);
+             $('#recipe').append(recipeSteps);
+            }
+          }
+        }
+      })
     }
   });
   unsplashImg();
@@ -107,9 +127,10 @@ function unsplashImg() {
     method: "GET",
   }).then(function (responseUnsplash) {
     var backgroundURL = responseUnsplash.results[0].urls.full;
-    console.log(backgroundURL)
     $("main").css("background", "transparent url('"+backgroundURL+"') no-repeat center center fixed");
+    $("main").css("background-size", "cover")
+    $("main").css("background-position", "center")
+    $("main").css("background-repeat", "no-repeat")
   });
-
 }
 
