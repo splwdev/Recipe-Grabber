@@ -8,7 +8,7 @@ calls to serve the user with a recipie and an image of the chosen meal.
 The website is also desgned to be able to create a meal from ingredients supplied by the user.
 
 
-## Screenshot of the Recipe-Grabber uppon loading
+## Screenshot of the Recipe-Grabber before a search
 
 
   <img alt="Screenshot_1" src="assets\images\screenshot1.png">
@@ -19,6 +19,12 @@ The website is also desgned to be able to create a meal from ingredients supplie
 
 
   <img alt="Screenshot_1" src="assets\images\screenshot2.png">
+
+## Screenshot of the Recipe-Grabber recipe steps modal
+
+
+  <img alt="Screenshot_1" src="assets\images\screenshot3.png">
+
 
 ## Installation
 
