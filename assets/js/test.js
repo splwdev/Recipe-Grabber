@@ -82,19 +82,17 @@ function getRecipes() {
 
     for (i = 0; i < response.results.length; i++) {
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
-      var recipeTitle = $("<a>").attr("id", response.results[i].title.replaceAll(' ', '-'));
+      //var recipeTitle = $("<a>").attr("id", response.results[i].title.replaceAll(' ', '-'));
       var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
       var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Save Recipe");
       $(header).append(headerTitle);
-      $(recipeLink).append(recipeImage);
-      $(recipeCard).append(header, recipeLink, saveRecipe);
-      var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
+      //$(recipeTitle).append(recipeImage);
+      $(recipeCard).append(header, recipeImage, saveRecipe);
+      //var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
 
-      $(header).append(headerTitle);
-      $(recipeTitle).append(recipeImage);
-      $(recipeCard).append(header, recipeTitle, getRecipe);
+      //$(recipeTitle).append(recipeImage);
       $(resultCardRow).append(recipeCard);
 
       recipeCard.click(function(e) {
