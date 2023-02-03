@@ -59,7 +59,7 @@
       </div>
       <div class="row pt-5">
         <section class="container pb-3">
-            <div class="row" id="recipe-title">
+            <div class="row" id="recipe-title-main">
                 <h1 class="title is-4 text-dark col-lg-12 has-text-centered">Recipe List</h1>
                 <hr>
             </div>
@@ -74,6 +74,7 @@
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Saved Recipes</p>
+
                 <button class="close-modal delete" aria-label="close"></button>
             </header>
             <section id="recipes" class="modal-card-body">
@@ -81,10 +82,22 @@
             </section>
         </div>
     </div>
+    <div id="displayed-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title text-dark" id="recipe-title"></p>
+           
+                <button class="close-modal delete" aria-label="close"></button>
+            </header>
+            <section id="displayed-recipe" class="modal-card-body">
+                <div id="recipe">
 
-    <div id="recipe">
-
+                </div> 
+            </section>
+        </div>
     </div>
+
 
     </main>
     <footer>
