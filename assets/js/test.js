@@ -55,9 +55,9 @@ $(".close-modal").on("click", function () {
 });
 
 // event handler to add saved recipe to local storage
-$(recipeDisplay).on("click", ".save-recipe", function () {
+$("#displayed-modal").on("click", ".save-recipe", function () {
   localStorage.getItem("savedRecipes");
-  var recipeTitle = $(this).closest(".card").find(".card-title").text();
+  var recipeTitle = $(this).closest(".modal").find(".modal-card-title").text();
   console.log(recipeTitle);
   recipeArr.push(recipeTitle);
   localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
@@ -101,7 +101,7 @@ function getRecipes() {
       //$(recipeTitle).append(recipeImage);
       $(recipeCard).append(header, recipeImage);
       //var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
-      
+
       //$(recipeTitle).append(recipeImage);
       $(resultCardRow).append(recipeCard);
 
@@ -109,9 +109,8 @@ function getRecipes() {
         $('#recipe').empty();
         $("#recipe-title").empty();
         $("#displayed-modal").addClass("is-active");
-        var recipe = $('<h1>');
-        recipe.text(e.currentTarget.firstChild.innerText);
-        $('#recipe-title').append(recipe);
+        var recipe = $('<h2>').addClass("text-dark recipe-modal-header").text(e.currentTarget.firstChild.innerText);
+      $('#recipe-title').append(recipe);
         for(i = 0; i < 10; i++) {
           if(response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length
