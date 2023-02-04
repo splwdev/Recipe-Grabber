@@ -90,3 +90,8 @@ h4 {
     margin-left: -4px;
     text-align: center;
 }
+
+.modal-card-title {
+    inline-size: 150px;
+    overflow-wrap: break-word;
+}
