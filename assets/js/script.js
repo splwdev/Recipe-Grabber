@@ -81,17 +81,33 @@ $(".close-modal").on("click", function () {
 $(".close-modal").on("click", function () {
   $("#recipe-modal").removeClass("is-active");
 });
+// event handler for back button on modal
+$("#recipe-modal").on("click", ".back-btn", function () {
+  $("#recipe-modal").removeClass("is-active");
+  // $("#recipe-modal").empty();
+  $("#saved-modal").addClass("is-active");
+});
 
 // event handler to add saved recipe to local storage
 $("#displayed-modal").on("click", ".save-recipe", function () {
+  // var reacalledArrThing = 
   localStorage.getItem("savedRecipes");
-  var tosaveRecipe = {
-    recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
-    recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text()
-  }
-  // console.log(tosaveRecipe);
-  recipeArr.push(tosaveRecipe);
-  localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
+  // console.log(reacalledArrThing);
+  // if(reacalledArrThing === null){
+  
+  // for (let i = 0; i < reacalledArrThing.length; i++) {
+    // if (reacalledArrThing[i] == $(this).closest(".modal").find(".modal-card-title").text());
+
+    var tosaveRecipe = {
+      recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
+      recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text()
+    }
+  // }
+    // console.log(tosaveRecipe);
+    recipeArr.push(tosaveRecipe);
+    localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
+  
+
 });
 
 // event handler to add saved recipe to local storage
@@ -119,7 +135,9 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
         instructionText.text(recipeTextArr[i]);
         instructions.append(instructionText);
         $("#display-saved-recipe").append(instructions);
-      }      
+      }
+      var backButton = $("<button>").addClass("back-btn button is-primary").text("< Back").attr("id", "back-btn");
+      $("#display-saved-recipe").append(backButton);
     }
   });
 });
