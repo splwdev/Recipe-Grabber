@@ -90,24 +90,22 @@ $("#recipe-modal").on("click", ".back-btn", function () {
 
 // event handler to add saved recipe to local storage
 $("#displayed-modal").on("click", ".save-recipe", function () {
-  // var reacalledArrThing = 
-  localStorage.getItem("savedRecipes");
-  // console.log(reacalledArrThing);
-  // if(reacalledArrThing === null){
-  
-  // for (let i = 0; i < reacalledArrThing.length; i++) {
-    // if (reacalledArrThing[i] == $(this).closest(".modal").find(".modal-card-title").text());
-
+    localStorage.getItem("savedRecipes");
+    var recipeTitleFromModal = $(this).closest(".modal").find(".modal-card-title").text()
+   
+    for(i=0;i<recipeArr.length;i++) {
+      if (recipeArr !== null && recipeArr[i].recipeTitle.includes(recipeTitleFromModal) === true) {
+        return;
+      } 
+    }
+   
     var tosaveRecipe = {
       recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
       recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text()
     }
-  // }
-    // console.log(tosaveRecipe);
+
     recipeArr.push(tosaveRecipe);
     localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
-  
-
 });
 
 // event handler to add saved recipe to local storage
@@ -120,7 +118,7 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
     if (currentTitle === e.recipeTitle) {
       $(saveModal).removeClass("is-active");
       $("#recipe-modal").addClass("is-active");
-      var recipe = $("<h4>").addClass("text-dark recipe-modal-header").text(currentTitle);
+      var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(currentTitle);
       $("#saved-recipe-title").append(recipe);
       var instructions = $("<div>").addClass("text-dark recipe-modal-body"); //.text(e.recipeInstructions);
       // console.log(e.recipeInstructions);
@@ -148,7 +146,7 @@ function getRecipes() {
   localStorage.getItem("savedRecipes");
   $("#recipe-display").empty();
   $("#recipe").empty();
-  recipeArr = [];
+  // recipeArr = [];
   const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
   $.ajax({
     url: recipeIdSearch,
