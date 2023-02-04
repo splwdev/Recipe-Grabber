@@ -152,7 +152,7 @@ function getRecipes() {
     url: recipeIdSearch,
     method: "GET",
   }).then(function (response) {
-    // console.log(response);
+    console.log(response);
     var resultCard = $("<div>").addClass("card result-card has-background-black");
     var resultBody = $("<div>").addClass("card-body");
     var resultCardRow = $("<div>").addClass("row justify-content-center");

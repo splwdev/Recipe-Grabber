@@ -6,18 +6,6 @@ html {
     overflow-x: hidden;
 }
 
-.modal-card-title {
-        inline-size: 150px;
-        overflow-wrap: break-word;
-    }
-/* main {
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background: rgba(0, 0, 0, 0.3)
-} */
-
 button, input {
     cursor: pointer;
     background-position: center;
@@ -95,7 +83,23 @@ h4 {
     text-align: center;
 }
 
+/* main {
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background: rgba(0, 0, 0, 0.3)
+} */
+
+.modal {
+    max-width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .modal-card-title {
     inline-size: 150px;
     overflow-wrap: break-word;
 }
+
