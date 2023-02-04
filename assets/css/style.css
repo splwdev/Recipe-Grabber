@@ -6,6 +6,10 @@ html {
     overflow-x: hidden;
 }
 
+.modal-card-title {
+        inline-size: 150px;
+        overflow-wrap: break-word;
+    }
 /* main {
     -webkit-background-size: cover;
   -moz-background-size: cover;

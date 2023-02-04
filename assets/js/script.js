@@ -148,7 +148,7 @@ function getRecipes() {
   localStorage.getItem("savedRecipes");
   $("#recipe-display").empty();
   $("#recipe").empty();
-  recipeArr = [];
+  // recipeArr = [];
   const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
   $.ajax({
     url: recipeIdSearch,
