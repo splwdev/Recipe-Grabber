@@ -77,7 +77,7 @@ $(".close-modal").on("click", function () {
 $(".close-modal").on("click", function () {
   $("#displayed-modal").removeClass("is-active");
 });
-
+// event handler to close recipe-modal
 $(".close-modal").on("click", function () {
   $("#recipe-modal").removeClass("is-active");
 });
