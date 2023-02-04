@@ -166,7 +166,7 @@ function getRecipes() {
              $('#recipe').append(recipeSteps);
             }
             
-            var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Mark as Favourite ");
+            var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Mark as Favourite ❤");
             $('#recipe').append(saveRecipe);
           }
         }
