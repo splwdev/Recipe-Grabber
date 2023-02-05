@@ -42,6 +42,12 @@ https://https://splwdev.github.io/Recipe-Grabber
 ## Credits
 
 Credit to Mozilla Developer Network and Stack Overflow for some help with Javascript functions
+Credits to the following for making this possible:
+- Spoonacular for food API services
+- Unsplash for image API searches
+- FontAwesome for some funky icons and fonts
+- SVGrepo.com for free icons and images under MIT License
+- Some additional credits displayed dynamically in the footer from specific search results
 
 ## License
 

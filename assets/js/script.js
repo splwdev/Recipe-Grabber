@@ -160,7 +160,7 @@ function getRecipes() {
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
     if (response.totalResults === 0) {
-      $(".card-body").text("No results -  Please try another search").addClass("no-results-text");
+      $(".card-body").text("Sorry! no recipe results found -  Please try another search").addClass("no-results-text");
       return;
     }
     for (i = 0; i < response.results.length; i++) {
@@ -179,6 +179,7 @@ function getRecipes() {
       $(resultCardRow).append(recipeCard);
 
       recipeCard.click(function (e) {
+        console.log(response.results);
         $('#recipe').empty();
         $("#recipe-title").empty();
         $("#displayed-modal").addClass("is-active");
