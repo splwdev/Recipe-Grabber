@@ -88,6 +88,18 @@ $("#recipe-modal").on("click", ".back-btn", function () {
   $("#saved-modal").addClass("is-active");
 });
 
+$(".close-modal").on("click", function () {
+  $("#ingredients-modal").removeClass("is-active");
+});
+
+$("#ingredients-modal").on("click", ".back-btn", function () {
+  $("#ingredients-modal").removeClass("is-active");
+  // $("#recipe-modal").empty();
+  $("#displayed-modal").addClass("is-active");
+});
+
+
+
 // event handler to add saved recipe to local storage
 $("#displayed-modal").on("click", ".save-recipe", function () {
     localStorage.getItem("savedRecipes");
@@ -107,6 +119,7 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
     recipeArr.push(tosaveRecipe);
     localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
 });
+
 
 // event handler to add saved recipe to local storage
 $("#saved-modal").on("click", ".recipeUrl", function () {
@@ -140,6 +153,30 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
   });
 });
 
+// INGREDIENTS MODAL
+$("#displayed-modal").on("click", ".ingredients", function () {
+  $("#ingredients-title").empty();
+  $("#ingredientsrecipe").empty();
+
+  $('#displayed-modal').removeClass("is-active");
+  $("#ingredients-modal").addClass("is-active");
+
+  var currentTitle = $(this).text();
+  $('#ingredients-title').append(currentTitle)
+  var ingredientsArr = localStorage.getItem("ingredients")
+  ingredientsArr = ingredientsArr.split("   ");
+
+  for (let i = 0; i < ingredientsArr.length; i++) {
+      var ingredientsText = $("<p>");
+      console.log(ingredientsArr[i])
+      ingredientsText.text(ingredientsArr[i]);
+      $('#ingredientsrecipe').append(ingredientsText);
+  }
+      var backButton = $("<button>").addClass("back-btn button is-primary").text("< Back").attr("id", "back-btn");
+      $("#ingredientsrecipe").append(ingredientsText, backButton);
+
+});
+
 // function to get recipes and place them in cards
 // currently only using spoonacular, need to incorporate unsplash for images instead
 function getRecipes() {
@@ -152,7 +189,7 @@ function getRecipes() {
     url: recipeIdSearch,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
+   // console.log(response);
     var resultCard = $("<div>").addClass("card result-card has-background-black");
     var resultBody = $("<div>").addClass("card-body");
     var resultCardRow = $("<div>").addClass("row justify-content-center");
@@ -169,6 +206,11 @@ function getRecipes() {
       var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
+
+
+      
+
+      //getIngredients(response.results[i].id);
       // var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Save Recipe");
       $(header).append(headerTitle);
       //$(recipeTitle).append(recipeImage);
@@ -179,7 +221,9 @@ function getRecipes() {
       $(resultCardRow).append(recipeCard);
 
       recipeCard.click(function (e) {
-        console.log(response.results);
+       // console.log(response.results)
+                
+
         $('#recipe').empty();
         $("#recipe-title").empty();
         $("#displayed-modal").addClass("is-active");
@@ -188,7 +232,8 @@ function getRecipes() {
         for (i = 0; i < 10; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length
-
+            var recipeId = response.results[i].id
+            getIngredients(recipeId)
             for (k = 0; k < recipeLength; k++) {
               var recipeSteps = $('<p>');
               // putting a large space at the start of each recipe step to separate on later
@@ -196,8 +241,9 @@ function getRecipes() {
               $('#recipe').append(recipeSteps);
             }
 
-            var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Mark as Favourite ❤"); // ❤
-            $('#recipe').append(saveRecipe);
+            var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Mark as Favourite ❤");
+            var ingredientList = $("<button>").addClass("ingredients button is-primary is-pulled-right").text("Ingredients"); // ❤
+            $('#recipe').append(saveRecipe, ingredientList);
           }
         }
       })
@@ -221,4 +267,29 @@ function unsplashImg() {
     $("main").css("background-position", "center")
     $("main").css("background-repeat", "no-repeat")
   });
+}
+
+function getIngredients(recipeId) {
+        var queryURL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?includeNutrition=false&apiKey=" + apiKey;
+        var ingredientArr = []
+        // https://api.spoonacular.com/recipes/1096212/information?includeNutrition=false&apiKey=be6eef2b49db4c8dbd28a079057dc1bf
+
+       // console.log(queryURL)
+        $.ajax({
+          url: queryURL,
+          method: 'GET'
+        }).then(function(recipeIdResponse) {
+          for(i = 0; i < recipeIdResponse.extendedIngredients.length; i++) {
+            var ingredient = recipeIdResponse.extendedIngredients[i].name;
+            var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
+            var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
+
+            
+          //  console.log(measureAmount + " " + measureUnit + " " + ingredient)
+            ingredientArr.push("   " + measureAmount + " " + measureUnit + " " + ingredient)
+            
+          }
+          localStorage.setItem("ingredients", ingredientArr);
+        })
+
 }
