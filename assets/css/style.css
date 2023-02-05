@@ -28,6 +28,14 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+.no-results-text {
+    color: white;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: larger;
+}
+
 h1,
 h2,
 h3,
