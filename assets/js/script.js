@@ -16,6 +16,7 @@
 
 // if theres time, allow user to get a search result from list of ingredients
 
+// Global variables
 var savedRecipesBtn = $("#saved-recipes");
 var apiKeyInput = $("#api-key");
 var searchInput = $("#search-text");
@@ -28,7 +29,6 @@ var savedRecipes = localStorage.getItem("savedRecipes");
 var recipeSearch = "";
 var currentRecipe = [];
 
-
 // dark light mode favicon change
 const faviconTag = document.getElementById("faviconTag");
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
@@ -40,18 +40,18 @@ const changeFavicon = () => {
 changeFavicon();
 isDark.addEventListener("change", changeFavicon);
 
-// event handler for searchBtn
+// Event Handlers
+// Search button event handler for searching for recipes
 $(searchBtn).on("click", function (event) {
   event.preventDefault();
   apiKey = $(apiKeyInput).val();
   recipeSearch = $(searchInput).val();
-  // console.log(recipeSearch);
   getRecipes();
   searchInput.val("");
 });
 
-// event handler for savedRecipesBtn, opens modal with saved recipes
-// still need to work on button to save recipes
+// Modal Event Handlers
+// Event handler to display recipes marked as favourites
 $(savedRecipesBtn).on("click", function (event) {
   event.preventDefault();
   $(saveModal).addClass("is-active");
@@ -71,80 +71,7 @@ $(savedRecipesBtn).on("click", function (event) {
   };
 });
 
-// event handler to close save modal
-$(".close-modal").on("click", function () {
-  $("#saved-modal").removeClass("is-active");
-});
-// event handler to close displayed-modal
-$(".close-modal").on("click", function () {
-  $("#displayed-modal").removeClass("is-active");
-});
-// event handler to close recipe-modal
-$(".close-modal").on("click", function () {
-  $("#recipe-modal").removeClass("is-active");
-});
-// event handler for back button on modal
-$("#recipe-modal").on("click", ".back-btn", function () {
-  $("#recipe-modal").removeClass("is-active");
-  // $("#recipe-modal").empty();
-  $("#saved-modal").addClass("is-active");
-});
-// event handler for close ingredients modal
-$(".close-modal").on("click", function () {
-  $("#ingredients-modal").removeClass("is-active");
-});
-
-$("#ingredients-modal").on("click", ".back-btn", function () {
-  $("#ingredients-modal").removeClass("is-active");
-  // $("#recipe-modal").empty();
-  $("#displayed-modal").addClass("is-active");
-});
-
-$("#ingredients-modal").on("click", ".back-to-saved-steps", function () {
-  $("#ingredients-modal").removeClass("is-active");
-  // $("#recipe-modal").empty();
-  $("#recipe-modal").addClass("is-active");
-});
-
-$("#recipe-modal").on("click", ".ingredients", function () {
-  $("#ingredients-title").empty();
-  $("#ingredientsrecipe").empty();
-  var recipeId = JSON.parse(localStorage.getItem("savedRecipes"));
-  // console.log(recipeId);
-
-  // getIngredients(recipeId.id);
-  $('#saved-modal').removeClass("is-active");
-  $("#ingredients-modal").addClass("is-active");
-
-  var ingredientsTitle = $(this).text();
-  $('#ingredients-title').append(ingredientsTitle)
-  var ingredientsArr = localStorage.getItem("ingredients")
-  ingredientsArr = ingredientsArr.split("   ");
-  // var currentTitle = $(".recipe-card-title").text();
-  console.log(currentRecipe)
-  console.log(recipeId[0].recipeTitle)
-  for(let i=0; i<recipeId.length; i++){
-    if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
-      console.log(recipeArr[i].recipeTitle)
-      console.log("yepo" + recipeArr[i].id)
-      // getIngredients(recipeId[i].id);
-      console.log(recipeArr[i].ingredients);
-      var ingredientsText = $("<p>");
-      // console.log(ingredientsArr[i])
-      ingredientsText.text(recipeArr[i].ingredients);
-      $('#ingredientsrecipe').append(ingredientsText);
-    }
-}
-  // for (let i = 0; i < ingredientsArr.length; i++) {
-
-  // }
-  var backButton = $("<button>").addClass("back-to-saved-steps button is-primary").text("< Back").attr("id", "back-btn");
-  $("#ingredientsrecipe").append(ingredientsText, backButton);
-
-});
-
-
-// event handler to add saved recipe to local storage
+// Event handler to favourite a recipe
 $("#displayed-modal").on("click", ".save-recipe", function () {
   localStorage.getItem("savedRecipes");
   var recipeTitleFromModal = $(this).closest(".modal").find(".modal-card-title").text()
@@ -169,30 +96,25 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
   localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
 });
 
-
-// event handler to add saved recipe to local storage
+// Event handler to open the recipe instructions from the favourite recipes
 $("#saved-modal").on("click", ".recipeUrl", function () {
   currentRecipe = [];
-  // console.log(recipeArr);
   $("#saved-recipe-title").empty();
   $("#display-saved-recipe").empty();
   var currentTitle = $(this).text();
   currentRecipe.push(currentTitle);
-  // console.log(currentTitle)
   recipeArr.forEach(function (e) {
     if (currentTitle === e.recipeTitle) {
       $(saveModal).removeClass("is-active");
       $("#recipe-modal").addClass("is-active");
       var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(currentTitle);
       $("#saved-recipe-title").append(recipe);
-      var instructions = $("<div>").addClass("text-dark recipe-modal-body"); //.text(e.recipeInstructions);
-      // console.log(e.recipeInstructions);
+      var instructions = $("<div>").addClass("text-dark recipe-modal-body");
       var recipeTextString = e.recipeInstructions;
       // remove button text from modal text grab by trimming the end of the string
       recipeTextString = recipeTextString.substr(0, recipeTextString.length - 67);
-      // console.log(recipeTextString);
       var recipeTextArr = recipeTextString.split("   ");
-      // instructions.text(recipeTextArr);
+
       for (let i = 0; i < recipeTextArr.length; i++) {
         var instructionText = $("<p>");
         instructionText.text(recipeTextArr[i]);
@@ -206,43 +128,115 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
   });
 });
 
-// INGREDIENTS MODAL
+// Event handler to display ingredients required for a recipe from searched recipes
 $("#displayed-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").empty();
   $("#ingredientsrecipe").empty();
 
-  $('#displayed-modal').removeClass("is-active");
+  $("#displayed-modal").removeClass("is-active");
   $("#ingredients-modal").addClass("is-active");
 
   var currentTitle = $(this).text();
-  $('#ingredients-title').append(currentTitle)
+  $("#ingredients-title").append(currentTitle)
   var ingredientsArr = localStorage.getItem("ingredients")
   ingredientsArr = ingredientsArr.split("   ");
 
   for (let i = 0; i < ingredientsArr.length; i++) {
     var ingredientsText = $("<p>");
-    // console.log(ingredientsArr[i])
     ingredientsText.text(ingredientsArr[i]);
-    $('#ingredientsrecipe').append(ingredientsText);
+    $("#ingredientsrecipe").append(ingredientsText);
   }
   var backButton = $("<button>").addClass("back-btn button is-primary").text("< Back").attr("id", "back-btn");
   $("#ingredientsrecipe").append(ingredientsText, backButton);
 
 });
 
+// Event handler to display the required ingredients for the favourite recipes
+$("#recipe-modal").on("click", ".ingredients", function () {
+  $("#ingredients-title").empty();
+  $("#ingredientsrecipe").empty();
+  $("#saved-modal").removeClass("is-active");
+  $("#ingredients-modal").addClass("is-active");
+  
+  var recipeId = JSON.parse(localStorage.getItem("savedRecipes"));
+  var ingredientsTitle = $(this).text();
+  $("#ingredients-title").append(ingredientsTitle);
+
+  var ingredientsArr = localStorage.getItem("ingredients");
+  ingredientsArr = ingredientsArr.split("   ");
+
+  for (let i = 0; i < recipeId.length; i++) {
+    if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
+      console.log(recipeArr[i].recipeTitle);
+      console.log("yepo" + recipeArr[i].id);
+      console.log(recipeArr[i].ingredients);
+      var ingredientsText = $("<p>");
+      ingredientsText.text(recipeArr[i].ingredients);
+      $("#ingredientsrecipe").append(ingredientsText);
+    }
+  }
+
+  var backButton = $("<button>").addClass("back-to-saved-steps button is-primary").text("< Back").attr("id", "back-btn");
+  $("#ingredientsrecipe").append(ingredientsText, backButton);
+});
+
+// Event handlers to close / open modals
+// Event handler to close saved modal
+$(".close-modal").on("click", function () {
+  $("#saved-modal").removeClass("is-active");
+});
+
+// Event handler to close displayed-modal
+$(".close-modal").on("click", function () {
+  $("#displayed-modal").removeClass("is-active");
+});
+
+// Event handler to close recipe-modal
+$(".close-modal").on("click", function () {
+  $("#recipe-modal").removeClass("is-active");
+});
+
+// Event handler for close ingredients modal
+$(".close-modal").on("click", function () {
+  $("#ingredients-modal").removeClass("is-active");
+});
+
+// Event handlers for back button
+// Event handler for back button on the recipe-modal to saved-modal
+$("#recipe-modal").on("click", ".back-btn", function () {
+  $("#recipe-modal").removeClass("is-active");
+  $("#saved-modal").addClass("is-active");
+});
+
+// Event handler for back button on the ingredients-modal to display-modal
+$("#ingredients-modal").on("click", ".back-btn", function () {
+  $("#ingredients-modal").removeClass("is-active");
+  $("#displayed-modal").addClass("is-active");
+});
+
+// Event handler for back button on the ingredients-modal to recipe-modal
+$("#ingredients-modal").on("click", ".back-to-saved-steps", function () {
+  $("#ingredients-modal").removeClass("is-active");
+  $("#recipe-modal").addClass("is-active");
+});
+
 // function to get recipes and place them in cards
-// currently only using spoonacular, need to incorporate unsplash for images instead
 function getRecipes() {
   localStorage.getItem("savedRecipes");
+  
+  // Clearing the #recipe-display and #recipe elements on a new search
   $("#recipe-display").empty();
   $("#recipe").empty();
-  // recipeArr = [];
+  
+  // Spoonacular API query
   const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
+  
+  // API call
   $.ajax({
     url: recipeIdSearch,
     method: "GET",
   }).then(function (response) {
-    // console.log(response);
+    // Setting the recipe results card display
     var resultCard = $("<div>").addClass("card result-card has-background-black");
     var resultBody = $("<div>").addClass("card-body");
     var resultCardRow = $("<div>").addClass("row justify-content-center");
@@ -255,27 +249,21 @@ function getRecipes() {
     }
     for (i = 0; i < response.results.length; i++) {
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
-      //var recipeTitle = $("<a>").attr("id", response.results[i].title.replaceAll(' ', '-'));
-      var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
+      var recipeImage = $("<img>").attr("src", response.results[i].image);
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
       $(header).append(headerTitle);
-      //$(recipeTitle).append(recipeImage);
       $(recipeCard).append(header, recipeImage);
-      //var getRecipe = $("<button>").addClass("get-recipe button is-primary").text("Get Recipe");
-
-      //$(recipeTitle).append(recipeImage);
       $(resultCardRow).append(recipeCard);
 
+      // Event handler to display the recipeCard when the image is clicked
       recipeCard.click(function (e) {
-        // console.log(response.results)
 
-
-        $('#recipe').empty();
+        $("#recipe").empty();
         $("#recipe-title").empty();
         $("#displayed-modal").addClass("is-active");
-        var recipe = $('<h2>').addClass("text-dark recipe-modal-header").text(e.currentTarget.firstChild.innerText);
-        $('#recipe-title').append(recipe);
+        var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(e.currentTarget.firstChild.innerText);
+        $("#recipe-title").append(recipe);
         for (i = 0; i < 10; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length
@@ -283,15 +271,16 @@ function getRecipes() {
             $("#recipe-id").text(recipeId);
             getIngredients(recipeId)
             for (k = 0; k < recipeLength; k++) {
-              var recipeSteps = $('<p>');
+              var recipeSteps = $("<p>");
               // putting a large space at the start of each recipe step to separate on later
               recipeSteps.text("   " + (k + 1) + ".) " + response.results[i].analyzedInstructions[0].steps[k].step);
-              $('#recipe').append(recipeSteps);
+              $("#recipe").append(recipeSteps);
             }
 
+            // Buttons to save the recipe as a favourite or view the ingredients list
             var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Mark as Favourite ❤");
             var ingredientList = $("<button>").addClass("ingredients button is-primary is-pulled-right").text("Ingredients"); // ❤
-            $('#recipe').append(saveRecipe, ingredientList);
+            $("#recipe").append(saveRecipe, ingredientList);
           }
         }
       })
@@ -300,6 +289,7 @@ function getRecipes() {
   unsplashImg();
 }
 
+// Function to call the background images from Unsplash as part of the recipe search
 function unsplashImg() {
   var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE";
   recipeSearch = $(searchInput).val();
@@ -317,28 +307,22 @@ function unsplashImg() {
   });
 }
 
+// Function to get the ingredients for the selected recipes
 function getIngredients(recipeId) {
   var queryURL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?includeNutrition=false&apiKey=" + apiKey;
   var ingredientArr = [];
-  // var idArr = [];
-  // https://api.spoonacular.com/recipes/1096212/information?includeNutrition=false&apiKey=be6eef2b49db4c8dbd28a079057dc1bf
 
-  // console.log(queryURL)
   $.ajax({
     url: queryURL,
-    method: 'GET'
+    method: "GET"
   }).then(function (recipeIdResponse) {
     for (i = 0; i < recipeIdResponse.extendedIngredients.length; i++) {
       var ingredient = recipeIdResponse.extendedIngredients[i].name;
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
 
-
-      //  console.log(measureAmount + " " + measureUnit + " " + ingredient)
       ingredientArr.push("   " + measureAmount + " " + measureUnit + " " + ingredient)
-      // idArr.push(recipeId);
     }
     localStorage.setItem("ingredients", ingredientArr);
   })
-
 }
