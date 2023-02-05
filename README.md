@@ -64,9 +64,9 @@ HTML, CSS, Javascript, JQuery
 
 ## Contributors
 
-Ben - https://github.com/benjistealth
-Toby - https://github.com/Tobyking13
-Shane - https://github.com/splwdev
+* Ben - https://github.com/benjistealth
+* Toby - https://github.com/Tobyking13
+* Shane - https://github.com/splwdev
 
 ## Tests
 
