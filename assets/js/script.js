@@ -103,17 +103,14 @@ $("#ingredients-modal").on("click", ".back-to-saved-steps", function () {
   // $("#recipe-modal").empty();
   $("#recipe-modal").addClass("is-active");
 });
-// $("#recipe-modal").on("click", ".back-btn", function () {
-//   $("#ingredients-modal").removeClass("is-active");
-//   // $("#recipe-modal").removeClass("is-active");
-//   // $("#recipe-modal").empty();
-//   // $("#displayed-modal").addClass("is-active");
-// });
 
 $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").empty();
   $("#ingredientsrecipe").empty();
+  var recipeId = JSON.parse(localStorage.getItem("savedRecipes"));
+  console.log(recipeId);
 
+  // getIngredients(recipeId.id);
   $('#saved-modal').removeClass("is-active");
   $("#ingredients-modal").addClass("is-active");
 
@@ -122,9 +119,15 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   var ingredientsArr = localStorage.getItem("ingredients")
   ingredientsArr = ingredientsArr.split("   ");
 
+  for(let i=0;i<recipeId.length;i++){
+    if(currentTitle == recipeId.recipeTitle){
+      console.log("yepo" + recipeId.id)
+    }
+}
+
   for (let i = 0; i < ingredientsArr.length; i++) {
     var ingredientsText = $("<p>");
-    console.log(ingredientsArr[i])
+    // console.log(ingredientsArr[i])
     ingredientsText.text(ingredientsArr[i]);
     $('#ingredientsrecipe').append(ingredientsText);
   }
@@ -147,7 +150,8 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
 
   var tosaveRecipe = {
     recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
-    recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text()
+    recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text(),
+    iD: $(this).closest(".modal").find("#recipe-id").text()
   }
 
   recipeArr.push(tosaveRecipe);
@@ -241,12 +245,6 @@ function getRecipes() {
       var recipeImage = $("<img>").attr("src", response.results[i].image).attr("target", "_blank").attr("rel", "noopener noreferrer");
       var header = $("<div>").addClass("card-header h-100");
       var headerTitle = $("<h5>").text(response.results[i].title).addClass("card-title text-dark");
-
-
-
-
-      //getIngredients(response.results[i].id);
-      // var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Save Recipe");
       $(header).append(headerTitle);
       //$(recipeTitle).append(recipeImage);
       $(recipeCard).append(header, recipeImage);
@@ -268,6 +266,7 @@ function getRecipes() {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length
             var recipeId = response.results[i].id
+            $("#recipe-id").text(recipeId);
             getIngredients(recipeId)
             for (k = 0; k < recipeLength; k++) {
               var recipeSteps = $('<p>');
@@ -306,7 +305,8 @@ function unsplashImg() {
 
 function getIngredients(recipeId) {
   var queryURL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?includeNutrition=false&apiKey=" + apiKey;
-  var ingredientArr = []
+  var ingredientArr = [];
+  // var idArr = [];
   // https://api.spoonacular.com/recipes/1096212/information?includeNutrition=false&apiKey=be6eef2b49db4c8dbd28a079057dc1bf
 
   // console.log(queryURL)
@@ -322,7 +322,7 @@ function getIngredients(recipeId) {
 
       //  console.log(measureAmount + " " + measureUnit + " " + ingredient)
       ingredientArr.push("   " + measureAmount + " " + measureUnit + " " + ingredient)
-
+      // idArr.push(recipeId);
     }
     localStorage.setItem("ingredients", ingredientArr);
   })
