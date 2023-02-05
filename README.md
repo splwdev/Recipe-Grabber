@@ -30,14 +30,14 @@ The website is also desgned to be able to create a meal from ingredients supplie
 
 NA - Website hosted on Github Pages
 
-https://https://splwdev.github.io/Recipe-Grabber
+https://splwdev.github.io/Recipe-Grabber
 
 ## Usage
 - First sign up with Spoonacular API and get an API key
 - Visit the page on Github pages, and enter your key in the form provided
 - Enter some search criteria into the form as well and search for some meal ideas
 - Any searches marked as favourite will be saved in local storage for when you return
-- Please have a play with it here: https://https://splwdev.github.io/Recipe-Grabber
+- Please have a play with it here: https://splwdev.github.io/Recipe-Grabber
 
 ## Credits
 
@@ -62,9 +62,11 @@ NA
 
 HTML, CSS, Javascript, JQuery
 
-## How to Contribute
+## Contributors
 
-NA
+Ben - https://github.com/benjistealth
+Toby - https://github.com/Tobyking13
+Shane - https://github.com/splwdev
 
 ## Tests
 
