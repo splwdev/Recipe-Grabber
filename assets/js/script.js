@@ -160,7 +160,7 @@ function getRecipes() {
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
     if (response.totalResults === 0) {
-      $(".card-body").text("No results -  Please try another search");
+      $(".card-body").text("No results -  Please try another search").addClass("no-results-text");
       return;
     }
     for (i = 0; i < response.results.length; i++) {
@@ -190,6 +190,7 @@ function getRecipes() {
 
             for (k = 0; k < recipeLength; k++) {
               var recipeSteps = $('<p>');
+              // putting a large space at the start of each recipe step to separate on later
               recipeSteps.text("   " + (k + 1) + ".) " + response.results[i].analyzedInstructions[0].steps[k].step);
               $('#recipe').append(recipeSteps);
             }
