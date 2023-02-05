@@ -124,17 +124,20 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   console.log(currentRecipe)
   console.log(recipeId[0].recipeTitle)
   for(let i=0; i<recipeId.length; i++){
-    if(currentRecipe[i] === recipeId[i].recipeTitle){
-      console.log("yepo" + recipeId[i].id)
-      getIngredients(recipeId[i].id);
+    if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
+      console.log(recipeArr[i].recipeTitle)
+      console.log("yepo" + recipeArr[i].id)
+      // getIngredients(recipeId[i].id);
+      console.log(recipeArr[i].ingredients);
+      var ingredientsText = $("<p>");
+      // console.log(ingredientsArr[i])
+      ingredientsText.text(recipeArr[i].ingredients);
+      $('#ingredientsrecipe').append(ingredientsText);
     }
 }
-  for (let i = 0; i < ingredientsArr.length; i++) {
-    var ingredientsText = $("<p>");
-    // console.log(ingredientsArr[i])
-    ingredientsText.text(ingredientsArr[i]);
-    $('#ingredientsrecipe').append(ingredientsText);
-  }
+  // for (let i = 0; i < ingredientsArr.length; i++) {
+
+  // }
   var backButton = $("<button>").addClass("back-to-saved-steps button is-primary").text("< Back").attr("id", "back-btn");
   $("#ingredientsrecipe").append(ingredientsText, backButton);
 
@@ -152,11 +155,15 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
     }
   }
 
+  getIngredients($(this).closest(".modal").find("#recipe-id").text());
+
   var tosaveRecipe = {
     recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
     recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text(),
-    id: $(this).closest(".modal").find("#recipe-id").text()
+    id: $(this).closest(".modal").find("#recipe-id").text(),
+    ingredients: localStorage.getItem("ingredients")
   }
+  console.log(tosaveRecipe);
 
   recipeArr.push(tosaveRecipe);
   localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
