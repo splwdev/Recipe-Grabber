@@ -26,6 +26,8 @@ var apiKey = "";
 var recipeArr = [];
 var savedRecipes = localStorage.getItem("savedRecipes");
 var recipeSearch = "";
+var currentRecipe = [];
+
 
 // dark light mode favicon change
 const faviconTag = document.getElementById("faviconTag");
@@ -108,23 +110,25 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").empty();
   $("#ingredientsrecipe").empty();
   var recipeId = JSON.parse(localStorage.getItem("savedRecipes"));
-  console.log(recipeId);
+  // console.log(recipeId);
 
   // getIngredients(recipeId.id);
   $('#saved-modal').removeClass("is-active");
   $("#ingredients-modal").addClass("is-active");
 
-  var currentTitle = $(this).text();
-  $('#ingredients-title').append(currentTitle)
+  var ingredientsTitle = $(this).text();
+  $('#ingredients-title').append(ingredientsTitle)
   var ingredientsArr = localStorage.getItem("ingredients")
   ingredientsArr = ingredientsArr.split("   ");
-
-  for(let i=0;i<recipeId.length;i++){
-    if(currentTitle == recipeId.recipeTitle){
-      console.log("yepo" + recipeId.id)
+  // var currentTitle = $(".recipe-card-title").text();
+  console.log(currentRecipe)
+  console.log(recipeId[0].recipeTitle)
+  for(let i=0; i<recipeId.length; i++){
+    if(currentRecipe[i] === recipeId[i].recipeTitle){
+      console.log("yepo" + recipeId[i].id)
+      getIngredients(recipeId[i].id);
     }
 }
-
   for (let i = 0; i < ingredientsArr.length; i++) {
     var ingredientsText = $("<p>");
     // console.log(ingredientsArr[i])
@@ -151,7 +155,7 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
   var tosaveRecipe = {
     recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
     recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text(),
-    iD: $(this).closest(".modal").find("#recipe-id").text()
+    id: $(this).closest(".modal").find("#recipe-id").text()
   }
 
   recipeArr.push(tosaveRecipe);
@@ -161,10 +165,13 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
 
 // event handler to add saved recipe to local storage
 $("#saved-modal").on("click", ".recipeUrl", function () {
+  currentRecipe = [];
   // console.log(recipeArr);
   $("#saved-recipe-title").empty();
   $("#display-saved-recipe").empty();
   var currentTitle = $(this).text();
+  currentRecipe.push(currentTitle);
+  // console.log(currentTitle)
   recipeArr.forEach(function (e) {
     if (currentTitle === e.recipeTitle) {
       $(saveModal).removeClass("is-active");
@@ -175,7 +182,7 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
       // console.log(e.recipeInstructions);
       var recipeTextString = e.recipeInstructions;
       // remove button text from modal text grab by trimming the end of the string
-      recipeTextString = recipeTextString.substr(0, recipeTextString.length - 33);
+      recipeTextString = recipeTextString.substr(0, recipeTextString.length - 67);
       // console.log(recipeTextString);
       var recipeTextArr = recipeTextString.split("   ");
       // instructions.text(recipeTextArr);
@@ -207,7 +214,7 @@ $("#displayed-modal").on("click", ".ingredients", function () {
 
   for (let i = 0; i < ingredientsArr.length; i++) {
     var ingredientsText = $("<p>");
-    console.log(ingredientsArr[i])
+    // console.log(ingredientsArr[i])
     ingredientsText.text(ingredientsArr[i]);
     $('#ingredientsrecipe').append(ingredientsText);
   }
