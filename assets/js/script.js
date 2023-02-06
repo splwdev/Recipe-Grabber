@@ -76,11 +76,14 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
   localStorage.getItem("savedRecipes");
   var recipeTitleFromModal = $(this).closest(".modal").find(".modal-card-title").text()
 
-  for (i = 0; i < recipeArr.length; i++) {
-    if (recipeArr !== null && recipeArr[i].recipeTitle.includes(recipeTitleFromModal) === true) {
-      return;
+  if (recipeArr !== null) {
+    for (i = 0; i < recipeArr.length; i++) {
+      if (recipeArr[i].recipeTitle.includes(recipeTitleFromModal) === true) {
+        return;
+      }
     }
   }
+  
 
   getIngredients($(this).closest(".modal").find("#recipe-id").text());
 
@@ -220,6 +223,7 @@ $("#ingredients-modal").on("click", ".back-to-saved-steps", function () {
   $("#recipe-modal").addClass("is-active");
 });
 
+// Functions
 // function to get recipes and place them in cards
 function getRecipes() {
   localStorage.getItem("savedRecipes");
