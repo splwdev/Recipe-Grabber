@@ -20,7 +20,7 @@
 $(document).ready(function () {
   var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "pie", "bbq", "lasagne"];
   var loadingBackground = Math.floor(Math.random() * images.length);
-  $("#search-text").val(images[loadingBackground]);
+  recipeSearch = images[loadingBackground];
   console.log(recipeSearch);
   unsplashImg();
 });
