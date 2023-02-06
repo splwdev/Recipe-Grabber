@@ -92,15 +92,17 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
       }
     }
   }
-
-
+  
+  // gets the id of the recipe clicked in the modal
   getIngredients($(this).closest(".modal").find("#recipe-id").text());
-
+  // grab the single search data with id and add to main obj
+  var ingredients = [];
+  ingredients.push(localStorage.getItem("ingredients"));
   var tosaveRecipe = {
     recipeTitle: $(this).closest(".modal").find(".modal-card-title").text(),
     recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text(),
     id: $(this).closest(".modal").find("#recipe-id").text(),
-    ingredients: localStorage.getItem("ingredients")
+    ingredients: ingredients
   }
   console.log(tosaveRecipe);
 
@@ -336,7 +338,7 @@ function getIngredients(recipeId) {
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
 
-      ingredientArr.push("   " + measureAmount + " " + measureUnit + " " + ingredient)
+      ingredientArr.push("   "  + recipeId + measureAmount + " " + measureUnit + " " + ingredient)
     }
     localStorage.setItem("ingredients", ingredientArr);
   })
