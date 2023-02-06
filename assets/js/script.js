@@ -23,6 +23,8 @@ $(document).ready(function () {
   recipeSearch = images[loadingBackground];
   console.log(recipeSearch);
   unsplashImg();
+  // run this to make sure it gets called at least once
+  changeFavicon();
 });
 
 // Global variables
@@ -38,7 +40,7 @@ var savedRecipes = localStorage.getItem("savedRecipes");
 var recipeSearch = "";
 var currentRecipe = [];
 
-// dark light mode favicon change
+// dark to light mode favicon change
 const faviconTag = document.getElementById("faviconTag");
 const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 const changeFavicon = () => {
@@ -46,7 +48,6 @@ const changeFavicon = () => {
   else faviconTag.href = "./assets/images/dark.svg";
 };
 // change favicon when theme mode changes 
-changeFavicon();
 isDark.addEventListener("change", changeFavicon);
 
 // Event Handlers
@@ -92,8 +93,8 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
       }
     }
   }
-  
-  // gets the id of the recipe clicked in the modal to use in function call
+
+  // gets the id of the recipe clicked in the modal to use in function call for ingredients
   getIngredients($(this).closest(".modal").find("#recipe-id").text());
   // grab the single search data with id and add to main obj
   var ingredients = [];
@@ -128,7 +129,7 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
       // remove button text from modal text grab by trimming the end of the string
       recipeTextString = recipeTextString.substr(0, recipeTextString.length - 67);
       var recipeTextArr = recipeTextString.split("   ");
-
+      // add recipe steps to modal
       for (let i = 0; i < recipeTextArr.length; i++) {
         var instructionText = $("<p>");
         instructionText.text(recipeTextArr[i]);
@@ -144,9 +145,10 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
 
 // Event handler to display ingredients required for a recipe from searched recipes
 $("#displayed-modal").on("click", ".ingredients", function () {
+  // clear contents before adding new content
   $("#ingredients-title").empty();
   $("#ingredientsrecipe").empty();
-
+  // hide / show modals
   $("#displayed-modal").removeClass("is-active");
   $("#ingredients-modal").addClass("is-active");
 
@@ -162,7 +164,6 @@ $("#displayed-modal").on("click", ".ingredients", function () {
   }
   var backButton = $("<button>").addClass("back-btn button is-primary").text("< Back").attr("id", "back-btn");
   $("#ingredientsrecipe").append(ingredientsText, backButton);
-
 });
 
 // Event handler to display the required ingredients for the favourite recipes
@@ -189,7 +190,7 @@ $("#recipe-modal").on("click", ".ingredients", function () {
       $("#ingredientsrecipe").append(ingredientsText);
     }
   }
-
+  // add back button and ingredients button to recipe steps
   var backButton = $("<button>").addClass("back-to-saved-steps button is-primary").text("< Back").attr("id", "back-btn");
   $("#ingredientsrecipe").append(ingredientsText, backButton);
 });
@@ -205,7 +206,7 @@ $(".close-modal").on("click", function () {
   $("#displayed-modal").removeClass("is-active");
 });
 
-// Event handler to close recipe-modal
+// Event handler to close recipe-modal (aka first ingredients modal)
 $(".close-modal").on("click", function () {
   $("#recipe-modal").removeClass("is-active");
 });
@@ -273,7 +274,6 @@ function getRecipes() {
 
       // Event handler to display the recipe steps when the image is clicked
       recipeCard.click(function (e) {
-
         $("#recipe").empty();
         $("#recipe-title").empty();
         $("#displayed-modal").addClass("is-active");
