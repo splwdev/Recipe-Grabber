@@ -60,7 +60,7 @@ $(searchBtn).on("click", function (event) {
 });
 
 // Modal Event Handlers
-// Event handler to display recipes marked as favourites
+// Event handler to display recipe steps from diplayed favoutites
 $(savedRecipesBtn).on("click", function (event) {
   event.preventDefault();
   $(saveModal).addClass("is-active");
@@ -93,7 +93,7 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
     }
   }
   
-  // gets the id of the recipe clicked in the modal
+  // gets the id of the recipe clicked in the modal to use in function call
   getIngredients($(this).closest(".modal").find("#recipe-id").text());
   // grab the single search data with id and add to main obj
   var ingredients = [];
@@ -110,7 +110,7 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
   localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
 });
 
-// Event handler to open the recipe instructions from the favourite recipes
+// Event handler to open the recipe steps from the favourite recipes modal
 $("#saved-modal").on("click", ".recipeUrl", function () {
   currentRecipe = [];
   $("#saved-recipe-title").empty();
@@ -134,7 +134,7 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
         instructionText.text(recipeTextArr[i]);
         instructions.append(instructionText);
         $("#display-saved-recipe").append(instructions);
-      }
+      } // adding back button and ingredients button to the modal
       var backButton = $("<button>").addClass("back-btn button is-primary").text("< Back").attr("id", "back-btn");
       var ingredientList = $("<button>").addClass("ingredients button is-primary is-pulled-right").text("Ingredients");
       $("#display-saved-recipe").append(backButton, ingredientList);
@@ -237,16 +237,16 @@ $("#ingredients-modal").on("click", ".back-to-saved-steps", function () {
 // Functions
 // function to get recipes and place them in cards
 function getRecipes() {
-  localStorage.getItem("savedRecipes");
+  // localStorage.getItem("savedRecipes");
 
-  // Clearing the #recipe-display and #recipe elements on a new search
+  // Clearing the #recipe-display and #recipe elements on a new search ready to append content
   $("#recipe-display").empty();
   $("#recipe").empty();
 
   // Spoonacular API query
   const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
 
-  // API call
+  // Initial Spoonacular API call
   $.ajax({
     url: recipeIdSearch,
     method: "GET",
@@ -271,7 +271,7 @@ function getRecipes() {
       $(recipeCard).append(header, recipeImage);
       $(resultCardRow).append(recipeCard);
 
-      // Event handler to display the recipeCard when the image is clicked
+      // Event handler to display the recipe steps when the image is clicked
       recipeCard.click(function (e) {
 
         $("#recipe").empty();
@@ -281,10 +281,10 @@ function getRecipes() {
         $("#recipe-title").append(recipe);
         for (i = 0; i < 10; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
-            var recipeLength = response.results[i].analyzedInstructions[0].steps.length
-            var recipeId = response.results[i].id
+            var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
+            var recipeId = response.results[i].id;
             $("#recipe-id").text(recipeId);
-            getIngredients(recipeId)
+            getIngredients(recipeId);
             for (k = 0; k < recipeLength; k++) {
               var recipeSteps = $("<p>");
               // putting a large space at the start of each recipe step to separate on later
@@ -304,7 +304,7 @@ function getRecipes() {
   unsplashImg();
 }
 
-// Function to call the background images from Unsplash as part of the recipe search
+// Function to call the background images from Unsplash
 function unsplashImg() {
   var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE";
   if ($(searchInput).val()) {
@@ -316,15 +316,16 @@ function unsplashImg() {
     url: imageURL,
     method: "GET",
   }).then(function (responseUnsplash) {
+    // using unsplash image as background for each user search
     var backgroundURL = responseUnsplash.results[0].urls.full;
     $("main").css("background", "transparent url('" + backgroundURL + "') no-repeat center center fixed");
-    $("main").css("background-size", "cover")
-    $("main").css("background-position", "center")
-    $("main").css("background-repeat", "no-repeat")
+    $("main").css("background-size", "cover");
+    $("main").css("background-position", "center");
+    $("main").css("background-repeat", "no-repeat");
   });
 }
 
-// Function to get the ingredients for the selected recipes
+// Function to get the ingredients for the selected recipe id
 function getIngredients(recipeId) {
   var queryURL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?includeNutrition=false&apiKey=" + apiKey;
   var ingredientArr = [];
@@ -338,8 +339,8 @@ function getIngredients(recipeId) {
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
 
-      ingredientArr.push(measureAmount + " " + measureUnit + " " + ingredient)
-    }
+      ingredientArr.push(measureAmount + " " + measureUnit + " " + ingredient);
+    } // save ingredients from API call with recipe ID
     localStorage.setItem("ingredients", ingredientArr);
   })
 }
