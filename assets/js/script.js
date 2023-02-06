@@ -16,6 +16,15 @@
 
 // if theres time, allow user to get a search result from list of ingredients
 
+// function to load random background from searchterm in array below on page load
+$(document).ready(function () {
+  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "pie", "bbq", "lasagne"];
+  var loadingBackground = Math.floor(Math.random() * images.length);
+  $("#search-text").val(images[loadingBackground]);
+  console.log(recipeSearch);
+  unsplashImg();
+});
+
 // Global variables
 var savedRecipesBtn = $("#saved-recipes");
 var apiKeyInput = $("#api-key");
@@ -83,7 +92,7 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
       }
     }
   }
-  
+
 
   getIngredients($(this).closest(".modal").find("#recipe-id").text());
 
@@ -160,7 +169,7 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredientsrecipe").empty();
   $("#saved-modal").removeClass("is-active");
   $("#ingredients-modal").addClass("is-active");
-  
+
   var recipeId = JSON.parse(localStorage.getItem("savedRecipes"));
   var ingredientsTitle = $(this).text();
   $("#ingredients-title").append(ingredientsTitle);
@@ -227,14 +236,14 @@ $("#ingredients-modal").on("click", ".back-to-saved-steps", function () {
 // function to get recipes and place them in cards
 function getRecipes() {
   localStorage.getItem("savedRecipes");
-  
+
   // Clearing the #recipe-display and #recipe elements on a new search
   $("#recipe-display").empty();
   $("#recipe").empty();
-  
+
   // Spoonacular API query
   const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
-  
+
   // API call
   $.ajax({
     url: recipeIdSearch,
@@ -296,7 +305,9 @@ function getRecipes() {
 // Function to call the background images from Unsplash as part of the recipe search
 function unsplashImg() {
   var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE";
-  recipeSearch = $(searchInput).val();
+  if ($(searchInput).val()) {
+    recipeSearch = $(searchInput).val();
+  }
   var imageURL = "https://api.unsplash.com/search/photos/?query=" + recipeSearch + "&client_id=" + APIKeyUnsplash;
 
   $.ajax({
