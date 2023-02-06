@@ -111,7 +111,7 @@ h4 {
     overflow-wrap: break-word;
 }
 #recipe-id {
-    color: white;
+    /* color: white; */
     display: none !important;
 }
 
