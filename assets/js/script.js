@@ -338,7 +338,7 @@ function getIngredients(recipeId) {
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
 
-      ingredientArr.push("   "  + recipeId + measureAmount + " " + measureUnit + " " + ingredient)
+      ingredientArr.push(measureAmount + " " + measureUnit + " " + ingredient)
     }
     localStorage.setItem("ingredients", ingredientArr);
   })
