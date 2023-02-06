@@ -21,10 +21,8 @@ $(document).ready(function () {
   var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "pie", "bbq", "lasagne"];
   var loadingBackground = Math.floor(Math.random() * images.length);
   recipeSearch = images[loadingBackground];
-  console.log(recipeSearch);
+  console.log("Background: " + recipeSearch);
   unsplashImg();
-  // run this to make sure it gets called at least once
-  changeFavicon();
 });
 
 // Global variables
@@ -47,6 +45,8 @@ const changeFavicon = () => {
   if (isDark.matches) faviconTag.href = "./assets/images/light.svg";
   else faviconTag.href = "./assets/images/dark.svg";
 };
+// run this to make sure it gets called at least once
+changeFavicon();
 // change favicon when theme mode changes 
 isDark.addEventListener("change", changeFavicon);
 
@@ -338,7 +338,7 @@ function getIngredients(recipeId) {
       var ingredient = recipeIdResponse.extendedIngredients[i].name;
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
-
+      // store array of ingredients pre-formatted per line
       ingredientArr.push(measureAmount + " " + measureUnit + " " + ingredient);
     } // save ingredients from API call with recipe ID
     localStorage.setItem("ingredients", ingredientArr);
