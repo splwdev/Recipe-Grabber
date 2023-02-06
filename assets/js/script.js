@@ -169,7 +169,7 @@ $("#displayed-modal").on("click", ".ingredients", function () {
 $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").empty();
   $("#ingredientsrecipe").empty();
-  $("#saved-modal").removeClass("is-active");
+  $("#recipe-modal").removeClass("is-active");
   $("#ingredients-modal").addClass("is-active");
 
   var recipeId = JSON.parse(localStorage.getItem("savedRecipes"));
