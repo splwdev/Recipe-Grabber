@@ -33,16 +33,16 @@ NA - Website hosted on Github Pages
 https://splwdev.github.io/Recipe-Grabber
 
 ## Usage
-- First sign up with Spoonacular API and get an API key
+- First get yourself a Spoonacular API key
 - Visit the page on Github pages, and enter your key in the form provided
-- Enter some search criteria into the form as well and search for some meal ideas
+- Enter some search criteria into the form and search for some meal ideas
 - Any searches marked as favourite will be saved in local storage for when you return
 - Please have a play with it here: https://splwdev.github.io/Recipe-Grabber
 
 ## Credits
 
-Credit to Mozilla Developer Network and Stack Overflow for some help with Javascript functions
-Credits to the following for making this possible:
+- Credit to Mozilla Developer Network and Stack Overflow for some help with Javascript functions
+- Credits to the following for making this possible:
 - Spoonacular for food API services
 - Unsplash for image API searches
 - FontAwesome for some funky icons and fonts
@@ -60,7 +60,7 @@ NA
 
 ## Features
 
-HTML, CSS, Javascript, JQuery
+HTML, CSS, Javascript, JQuery, Bootstrap, Bulma
 
 ## Contributors
 
