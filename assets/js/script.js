@@ -110,6 +110,11 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
       $("#recipe-modal").addClass("is-active");
       var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(currentTitle);
       $("#saved-recipe-title").append(recipe);
+      $("#saved-recipe-title").hover(function(){
+        $(this).css("background-color", "yellow");
+        }, function(){
+        $(this).css("background-color", "pink");
+      });
       var instructions = $("<div>").addClass("text-dark recipe-modal-body");
       var recipeTextString = e.recipeInstructions;
       // remove button text from modal text grab by trimming the end of the string
@@ -227,13 +232,14 @@ function getRecipes() {
   $("#recipe").empty();
 
   // Spoonacular API query
-  const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true";
+  const recipeIdSearch = "https://api.spoonacular.com/recipes/complexSearch?query=" + recipeSearch + "&apiKey=" + apiKey + "&includeInstruction=true&addRecipeInformation=true&number=9";
 
   // Initial Spoonacular API call
   $.ajax({
     url: recipeIdSearch,
     method: "GET",
   }).then(function (response) {
+    console.log(response)
     // Setting the recipe results card display
     var resultCard = $("<div>").addClass("card result-card has-background-black");
     var resultBody = $("<div>").addClass("card-body");
@@ -261,7 +267,8 @@ function getRecipes() {
         $("#displayed-modal").addClass("is-active");
         var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(e.currentTarget.firstChild.innerText);
         $("#recipe-title").append(recipe);
-        for (let i = 0; i < 10; i++) {
+        
+        for (let i = 0; i < response.totalResults; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
             var recipeId = response.results[i].id;
@@ -330,3 +337,4 @@ function getIngredients(recipeId) {
     
   })
 }
+
