@@ -53,8 +53,12 @@ a {
     color: #025d21 !important;
 }
 
+.result-heading {
+    display: none;
+    display:
+}
+
 img {
-    border-radius: 1em;
     box-shadow: 0 0 3px 3px #00000033;
 }
 
@@ -125,13 +129,11 @@ h4 {
     text-align: center;
 }
 
-/* main {
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background: rgba(0, 0, 0, 0.3)
-} */
+.card-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 
 .modal {
     max-width: 100%;
@@ -147,10 +149,6 @@ h4 {
 #recipe-id {
     /* color: white; */
     display: none !important;
-}
-
-.has-text-black:hover {
-    color: purple !important;
 }
 
 .result-card {
