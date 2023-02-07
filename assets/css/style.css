@@ -20,9 +20,7 @@ body::-webkit-scrollbar{
     display: none;
 }
 
-  /* main::-webkit-scrollbar{
-    display: none;
-  } */
+
 
 .hero {
     background-image: linear-gradient(
@@ -159,3 +157,13 @@ h4 {
 /* .heart {
     color: red;
 } */
+.has-text-black {
+    padding-left: 20px;
+}
+
+.has-text-black:hover {
+    color: white !important;
+    background-image: linear-gradient(to bottom, #0140bd, #4c53b3, #6a67a9, #807c9e, #929292);
+    border-radius: 10px;
+    padding-left: 20px;
+}
