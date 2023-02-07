@@ -50,7 +50,8 @@ $(savedRecipesBtn).on("click", function (event) {
   $(saveModal).addClass("is-active");
   var myRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
   recipeArr = myRecipes;
-  if (recipeArr == []) {
+  if (recipeArr === null) {
+    recipeArr = [];
     return;
   }
   $("#recipes").empty();
@@ -89,7 +90,6 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
     recipeInstructions: $(this).closest(".modal").find(".modal-card-body").text(),
     id: $(this).closest(".modal").find("#recipe-id").text(),
     ingredients: ingredients
-
   }
 
   // console.log(tosaveRecipe)
@@ -268,7 +268,7 @@ function getRecipes() {
         var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(e.currentTarget.firstChild.innerText);
         $("#recipe-title").append(recipe);
         
-        for (let i = 0; i < response.totalResults; i++) {
+        for (let i = 0; i < response.results.length; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
             var recipeId = response.results[i].id;
