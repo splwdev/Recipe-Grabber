@@ -38,6 +38,7 @@ isDark.addEventListener("change", changeFavicon);
 $(searchBtn).on("click", function (event) {
   event.preventDefault();
   $(".result-heading").attr("class", "title is-4 col-lg-12 has-text-centered");
+  $("#recipe-title-main").css("display", "inline");
   apiKey = $(apiKeyInput).val();
   recipeSearch = $(searchInput).val();
   getRecipes();
@@ -249,6 +250,7 @@ function getRecipes() {
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
     if (response.totalResults === 0) {
+      $("#recipe-title-main").css("display", "none");
       $(".card-body").text("Sorry! No recipe results found -  Please try another search").addClass("no-results-text");
       return;
     }
