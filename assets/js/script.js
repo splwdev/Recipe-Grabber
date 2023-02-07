@@ -110,7 +110,7 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
     if (currentTitle === e.recipeTitle) {
       $(saveModal).removeClass("is-active");
       $("#recipe-modal").addClass("is-active");
-      var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(currentTitle);
+      var recipe = $("<h2>").addClass("recipe-modal-header").text(currentTitle);
       $("#saved-recipe-title").append(recipe);
       // $("#saved-recipe-title").hover(function(){
       //   $(this).css("background-color", "yellow");
@@ -268,7 +268,7 @@ function getRecipes() {
         $("#recipe").empty();
         $("#recipe-title").empty();
         $("#displayed-modal").addClass("is-active");
-        var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(e.currentTarget.firstChild.innerText);
+        var recipe = $("<h2>").addClass("recipe-modal-header").text(e.currentTarget.firstChild.innerText);
         $("#recipe-title").append(recipe);
         
         for (let i = 0; i < response.results.length; i++) {
