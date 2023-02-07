@@ -66,6 +66,8 @@ $(savedRecipesBtn).on("click", function (event) {
 
 // Event handler to favourite a recipe
 $("#displayed-modal").on("click", ".save-recipe", function () {
+  $('.heart').css('color', 'red')
+
   localStorage.getItem("savedRecipes");
   var recipeTitleFromModal = $(this).closest(".modal").find(".modal-card-title").text()
 
@@ -273,7 +275,7 @@ function getRecipes() {
             }
 
             // Buttons to save the recipe as a favourite or view the ingredients list
-            var saveRecipe = $("<button>").addClass("save-recipe button is-primary").text("Mark as Favourite ❤");
+            var saveRecipe = $("<button>").addClass("save-recipe button is-primary").html("Mark as Favourite &nbsp; <span class='heart'> ❤</span>");
             var ingredientList = $("<button>").addClass("ingredients button is-primary is-pulled-right").text("Ingredients"); // ❤
             $("#recipe").append(saveRecipe, ingredientList);
           }
@@ -283,6 +285,8 @@ function getRecipes() {
   });
   unsplashImg();
 }
+
+{/* <p>This a <span class="crimson-text">crimson text</span> within others.</p> */}
 
 // Function to call the background images from Unsplash
 function unsplashImg() {
