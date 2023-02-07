@@ -296,8 +296,6 @@ function getRecipes() {
   unsplashImg();
 }
 
-{/* <p>This a <span class="crimson-text">crimson text</span> within others.</p> */}
-
 // Function to call the background images from Unsplash
 function unsplashImg() {
   var APIKeyUnsplash = "6E6B5n0kcsJUWySMsG9ewE8Ddesw6MegtEY4FU5_8gE";
@@ -333,7 +331,7 @@ function getIngredients(recipeId) {
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
       // store array of ingredients pre-formatted per line
-      ingredientArr.push(measureAmount + " " + measureUnit + " " + ingredient);
+      ingredientArr.push(i+1 + ".)  " + measureAmount + " " + measureUnit + " " + ingredient);
     } // save ingredients from API call with recipe ID
     localStorage.setItem("ingredients", JSON.stringify(ingredientArr));  
     
