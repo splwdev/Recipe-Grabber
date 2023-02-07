@@ -4,6 +4,34 @@ html {
     margin-left: auto;
     padding: 0px;
     overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+main {
+    height: 100vh;
+    /* / position:fixed; */
+    /* overflow-y: scroll; */
+    overflow-y: auto;
+    background-color: rgba(0,0,0,0);
+}
+
+.hero {
+    background-image: linear-gradient(
+        180deg,
+        hsl(240deg 5% 18%) 0%,
+        hsl(261deg 16% 21%) 6%,
+        hsl(279deg 27% 24%) 21%,
+        hsl(299deg 37% 27%) 55%,
+        hsl(318deg 47% 30%) 80%,
+        hsl(338deg 58% 33%) 91%,
+        hsl(357deg 69% 35%) 96%,
+        hsl(16deg 79% 38%) 99%,
+        hsl(35deg 90% 41%) 100%,
+        hsl(55deg 100% 44%) 100%
+      );
+border-bottom: 1px solid black;
+box-shadow: 0 0 10px 10px #00000033;
 }
 
 button, input {
