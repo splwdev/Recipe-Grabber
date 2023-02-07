@@ -37,6 +37,7 @@ isDark.addEventListener("change", changeFavicon);
 // Search button event handler for searching for recipes
 $(searchBtn).on("click", function (event) {
   event.preventDefault();
+  $(".result-heading").attr("class", "title is-4 col-lg-12 has-text-centered");
   apiKey = $(apiKeyInput).val();
   recipeSearch = $(searchInput).val();
   getRecipes();
@@ -110,11 +111,11 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
       $("#recipe-modal").addClass("is-active");
       var recipe = $("<h2>").addClass("text-dark recipe-modal-header").text(currentTitle);
       $("#saved-recipe-title").append(recipe);
-      $("#saved-recipe-title").hover(function(){
-        $(this).css("background-color", "yellow");
-        }, function(){
-        $(this).css("background-color", "pink");
-      });
+      // $("#saved-recipe-title").hover(function(){
+      //   $(this).css("background-color", "yellow");
+      //   }, function(){
+      //   $(this).css("background-color", "pink");
+      // });
       var instructions = $("<div>").addClass("text-dark recipe-modal-body");
       var recipeTextString = e.recipeInstructions;
       // remove button text from modal text grab by trimming the end of the string
@@ -248,7 +249,7 @@ function getRecipes() {
     $(resultCard).append(resultBody);
     $(recipeDisplay).append(resultCard);
     if (response.totalResults === 0) {
-      $(".card-body").text("Sorry! no recipe results found -  Please try another search").addClass("no-results-text");
+      $(".card-body").text("Sorry! No recipe results found -  Please try another search").addClass("no-results-text");
       return;
     }
     for (let i = 0; i < response.results.length; i++) {

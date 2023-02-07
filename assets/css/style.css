@@ -53,6 +53,10 @@ a {
     color: #025d21 !important;
 }
 
+.result-heading {
+    display: none;
+}
+
 img {
     border-radius: 1em;
     box-shadow: 0 0 3px 3px #00000033;
@@ -147,10 +151,6 @@ h4 {
 #recipe-id {
     /* color: white; */
     display: none !important;
-}
-
-.has-text-black:hover {
-    color: purple !important;
 }
 
 .result-card {
