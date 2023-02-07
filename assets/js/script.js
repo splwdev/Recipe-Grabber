@@ -1,30 +1,3 @@
-// get working queries for Unsplash and Spoonacular
-
-// SPOONACULAR
-// interperate response of user input for desired dish
-// allow user to select a recipe for the dish they want
-
-// set up localstorage if a user decides to save the recipe
-
-// set up a getItem so the user can recall a recipe that they previously saved
-
-// Once the user selects a recipe, get dish image from Spoonacular along with recipe data
-
-// Unsplash
-// once the application displays a list of dishes, use unsplash to show an image next to each dish title
-
-
-// if theres time, allow user to get a search result from list of ingredients
-
-// function to load random background from searchterm in array below on page load
-$(document).ready(function () {
-  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "pie", "bbq", "lasagne"];
-  var loadingBackground = Math.floor(Math.random() * images.length);
-  recipeSearch = images[loadingBackground];
-  console.log("Background: " + recipeSearch);
-  unsplashImg();
-});
-
 // Global variables
 var savedRecipesBtn = $("#saved-recipes");
 var apiKeyInput = $("#api-key");
@@ -37,6 +10,15 @@ var recipeArr = [];
 var savedRecipes = localStorage.getItem("savedRecipes");
 var recipeSearch = "";
 var currentRecipe = [];
+
+// function that picks a random image for homescreen
+$(document).ready(function () {
+  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "pie", "bbq", "lasagne"];
+  var loadingBackground = Math.floor(Math.random() * images.length);
+  recipeSearch = images[loadingBackground];
+  console.log("Background: " + recipeSearch);
+  unsplashImg();
+});
 
 // dark to light mode favicon change
 const faviconTag = document.getElementById("faviconTag");
@@ -155,7 +137,7 @@ $("#displayed-modal").on("click", ".ingredients", function () {
   var currentTitle = $(this).text();
   $("#ingredients-title").append(currentTitle)
   var ingredientsArr = localStorage.getItem("ingredients")
-  ingredientsArr = ingredientsArr.split("   ");
+  ingredientsArr = ingredientsArr.split(",");
 
   for (let i = 0; i < ingredientsArr.length; i++) {
     var ingredientsText = $("<p>");
@@ -178,7 +160,7 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").append(ingredientsTitle);
 
   var ingredientsArr = localStorage.getItem("ingredients");
-  ingredientsArr = ingredientsArr.split("   ");
+  ingredientsArr = ingredientsArr.split(",");
 
   for (let i = 0; i < recipeId.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
@@ -199,21 +181,10 @@ $("#recipe-modal").on("click", ".ingredients", function () {
 // Event handler to close saved modal
 $(".close-modal").on("click", function () {
   $("#saved-modal").removeClass("is-active");
-});
-
-// Event handler to close displayed-modal
-$(".close-modal").on("click", function () {
   $("#displayed-modal").removeClass("is-active");
-});
-
-// Event handler to close recipe-modal (aka first ingredients modal)
-$(".close-modal").on("click", function () {
   $("#recipe-modal").removeClass("is-active");
-});
-
-// Event handler for close ingredients modal
-$(".close-modal").on("click", function () {
   $("#ingredients-modal").removeClass("is-active");
+
 });
 
 // Event handlers for back button
