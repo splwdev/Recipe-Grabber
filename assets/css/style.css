@@ -157,6 +157,7 @@ h4 {
     color: red;
 } */
 .has-text-black {
+    color: white !important;
     padding-left: 20px;
 }
 

@@ -50,6 +50,8 @@ $(searchBtn).on("click", function (event) {
 // Event handler to display recipe steps from diplayed favoutites
 $(savedRecipesBtn).on("click", function (event) {
   event.preventDefault();
+  //modal background color
+  $("#recipes").css("background-color", "black");
   $(saveModal).addClass("is-active");
   var myRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
   recipeArr = myRecipes;
@@ -61,7 +63,7 @@ $(savedRecipesBtn).on("click", function (event) {
   for (let i = 0; i < recipeArr.length; i++) {
     var recipeName = recipeArr[i].recipeTitle;
     var result = $("<section>").addClass("recipe-item").val(recipeName);
-    var resultAnchor = $("<a>").attr("class", "recipeUrl").attr("data-link", recipeName);
+    var resultAnchor = $("<a>").attr("class", "recipeUrl").attr("data-link", recipeName).css("color", "white");
     resultAnchor.append($("<h2>").addClass("has-text-black is-size-4 pt-3 recipe-card-title").text(recipeName));
     result.append(resultAnchor);
     $("#recipes").append(result);
@@ -105,6 +107,8 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
   currentRecipe = [];
   $("#saved-recipe-title").empty();
   $("#display-saved-recipe").empty();
+     //modal background color
+     $("#display-saved-recipe").css("background-color", "black");
   var currentTitle = $(this).text();
   currentRecipe.push(currentTitle);
   recipeArr.forEach(function (e) {
@@ -113,19 +117,16 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
       $("#recipe-modal").addClass("is-active");
       var recipe = $("<h2>").addClass("recipe-modal-header").text(currentTitle);
       $("#saved-recipe-title").append(recipe);
-      // $("#saved-recipe-title").hover(function(){
-      //   $(this).css("background-color", "yellow");
-      //   }, function(){
-      //   $(this).css("background-color", "pink");
-      // });
+
       var instructions = $("<div>").addClass("text-dark recipe-modal-body");
       var recipeTextString = e.recipeInstructions;
       // remove button text from modal text grab by trimming the end of the string
       recipeTextString = recipeTextString.substr(0, recipeTextString.length - 67);
       var recipeTextArr = recipeTextString.split("   ");
       // add recipe steps to modal
+      $("")
       for (let i = 0; i < recipeTextArr.length; i++) {
-        var instructionText = $("<p>");
+        var instructionText = $("<p>").css("color", "white");
         instructionText.text(recipeTextArr[i]);
         instructions.append(instructionText);
         $("#display-saved-recipe").append(instructions);
@@ -151,10 +152,11 @@ $("#displayed-modal").on("click", ".ingredients", function () {
   //var ingredientsArr = [];
   var ingredientsArr = JSON.parse(localStorage.getItem("ingredients"));
   // ingredientsArr = ingredientsArr.split(",");
+  $("#display-ingredients").css("background-color", "gray");
 
   for (let i = 0; i < ingredientsArr.length; i++) {
 
-    var ingredientsText = $("<p>");
+    var ingredientsText = $("<p>").css("color", "white");
     ingredientsText.text(ingredientsArr[i]);
     $("#ingredientsrecipe").append(ingredientsText);
   }
@@ -278,10 +280,11 @@ function getRecipes() {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
             var recipeId = response.results[i].id;
+            $("#displayed-recipe").css("background-color", "black");
             $("#recipe-id").text(recipeId);
             getIngredients(recipeId);
             for (k = 0; k < recipeLength; k++) {
-              var recipeSteps = $("<p>");
+              var recipeSteps = $("<p>").css("color", "white");
               // putting a large space at the start of each recipe step to separate on later
               recipeSteps.text("   " + (k + 1) + ".) " + response.results[i].analyzedInstructions[0].steps[k].step);
               $("#recipe").append(recipeSteps);
