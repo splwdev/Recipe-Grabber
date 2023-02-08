@@ -5,7 +5,7 @@ A webpage recipie maker that finds recipes based on user search
 
 A webpage that displays a searchbox where a user can search for meal suggestions complete with recipe information and ingredients for chosen meals, the website will make external API 
 calls to serve the user with a recipie and ingredient information to make the chosen meal.
-We would like to add many more features to this as it has great potential, one of which might beto make the website able to create a meal from ingredients supplied by the user.
+We would like to add many more features to this as it has great potential, one of which might be to make the website able to create a meal from ingredients supplied by the user.
 
 
 ## Screenshot of the Recipe-Grabber before a search
