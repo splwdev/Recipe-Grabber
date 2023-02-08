@@ -175,22 +175,18 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   var ingredientsTitle = $(this).text();
   $("#ingredients-title").append(ingredientsTitle);
 
-  var ingredientsArr = JSON.parse(localStorage.getItem("savedRecipes"));
 $("#display-ingredients").css("background-color", "gray");
-  console.log(recipeFromLocalStorageObj)
+  console.log(recipeFromLocalStorageObj);
   for (let i = 0; i < recipeFromLocalStorageObj.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
-      for (let k = 0; k < ingredientsArr.length; k++) {
-        var ingredientsText = $("<p>").css("color", "white");
-        ingredientsText.text(ingredientsArr[i].ingredients[k]);
-        $("#ingredientsrecipe").append(ingredientsText);
-      }
-      // var ingredientsText = $("<p>");
-      // ingredientsArr = ingredientArr.split(',')
-      // console.log(ingredientArr)
-
-      // ingredientsText.text(ingredientsArr);
-      // $("#ingredientsrecipe").append(ingredientsText);
+      
+        var ingredientStep = recipeFromLocalStorageObj[i].ingredients.toString();
+        ingredientStep = ingredientStep.split("   ");
+        for (let k = 0; k < ingredientStep.length; k++) {
+          var ingredientsText = $("<p>").css("color", "white");
+          ingredientsText.text(ingredientStep[k]);
+          $("#ingredientsrecipe").append(ingredientsText);
+        }
     }
   }
   // add back button and ingredients button to recipe steps
@@ -337,7 +333,8 @@ function getIngredients(recipeId) {
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
       // store array of ingredients pre-formatted per line
-      ingredientArr.push(i + 1 + ".)  " + measureAmount + " " + measureUnit + " " + ingredient);
+      ingredientArr.push("   " + (i + 1) + ".)  " + measureAmount + " " + measureUnit + " " + ingredient);
+      //console.log(ingredientArr)
     } // save ingredients from API call with recipe ID
     localStorage.setItem("ingredients", JSON.stringify(ingredientArr));
 
