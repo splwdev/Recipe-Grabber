@@ -176,12 +176,12 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").append(ingredientsTitle);
 
   var ingredientsArr = JSON.parse(localStorage.getItem("ingredients"));
-
+$("#display-ingredients").css("background-color", "gray");
   console.log(recipeFromLocalStorageObj)
   for (let i = 0; i < recipeFromLocalStorageObj.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
-      for (let k = 0; k < ingredientArr.length; k++) {
-        var ingredientsText = $("<p>");
+      for (let k = 0; k < ingredientsArr.length; k++) {
+        var ingredientsText = $("<p>").css("color", "white");
         ingredientsText.text(ingredientsArr[k]);
         $("#ingredientsrecipe").append(ingredientsText);
       }
