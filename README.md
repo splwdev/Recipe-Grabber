@@ -1,11 +1,11 @@
 # Recipe-Grabber
-A webpage recipie maker that either finds recipies from ingredients listed, or finds a recipie for a meal searched.
+A webpage recipie maker that finds recipes based on user search
 
 ## Description
 
-A webpage that displays a searchbox where a user can enter a meal they would like to make, the website will make external API 
-calls to serve the user with a recipie and an image of the chosen meal.
-The website is also desgned to be able to create a meal from ingredients supplied by the user.
+A webpage that displays a searchbox where a user can search for meal suggestions complete with recipe information and ingredients for chosen meals, the website will make external API 
+calls to serve the user with a recipie and ingredient information to make the chosen meal.
+We would like to add many more features to this as it has great potential, one of which might beto make the website able to create a meal from ingredients supplied by the user.
 
 
 ## Screenshot of the Recipe-Grabber before a search
@@ -47,7 +47,7 @@ https://splwdev.github.io/Recipe-Grabber
 - Unsplash for image API searches
 - FontAwesome for some funky icons and fonts
 - SVGrepo.com for free icons and images under MIT License
-- Some additional credits displayed dynamically in the footer from specific search results
+- Some additional credits displayed dynamically from JSON in the footer from specific search results
 
 ## License
 
