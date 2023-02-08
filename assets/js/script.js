@@ -16,7 +16,7 @@ var ingredientArr = [];
 
 // function that picks a random image for homescreen
 $(document).ready(function () {
-  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "pie", "bbq", "lasagne"];
+  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "roast chicken", "bbq", "lasagne"];
   var loadingBackground = Math.floor(Math.random() * images.length);
   recipeSearch = images[loadingBackground];
   unsplashImg();
