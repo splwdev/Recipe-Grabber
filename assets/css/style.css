@@ -52,11 +52,8 @@ form {
     width: 90%;
 }
 
-
-
 .result-heading {
     display: none;
-    display:
 }
 
 img {
@@ -148,21 +145,17 @@ h4 {
     overflow-wrap: break-word;
 }
 #recipe-id {
-    /* color: white; */
     display: none !important;
 }
 
 .result-card {
     background: rgba(0,0,0,0.5) !important;
-    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
 }
 
-/* .heart {
-    color: red;
-} */
 .has-text-black {
     color: white !important;
     padding-left: 20px;
+    padding-bottom: 10px;
 }
 
 .has-text-black:hover {

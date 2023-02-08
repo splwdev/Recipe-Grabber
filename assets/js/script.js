@@ -68,7 +68,18 @@ $(savedRecipesBtn).on("click", function (event) {
     result.append(resultAnchor);
     $("#recipes").append(result);
   };
+  var clearButton = $("<button>").addClass("clear-btn button is-pulled-right is-primary").text("CLEAR Favourites").attr("id", "clear-btn");
+  $("#recipes").append(clearButton);
 });
+
+// listener for clear button 
+$("#saved-modal").on("click", ".clear-btn", function (event) {
+  event.preventDefault();
+  localStorage.clear();
+  $("#recipes").empty();
+  // $("#display-saved-recipe").empty();
+});
+
 
 // Event handler to favourite a recipe
 $("#displayed-modal").on("click", ".save-recipe", function () {
@@ -97,7 +108,6 @@ $("#displayed-modal").on("click", ".save-recipe", function () {
     ingredients: ingredients
   }
 
-  // console.log(tosaveRecipe)
   recipeArr.push(tosaveRecipe);
   localStorage.setItem("savedRecipes", JSON.stringify(recipeArr));
 });
@@ -121,7 +131,7 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
       var instructions = $("<div>").addClass("text-dark recipe-modal-body");
       var recipeTextString = e.recipeInstructions;
       // remove button text from modal text grab by trimming the end of the string
-      recipeTextString = recipeTextString.substr(0, recipeTextString.length - 67);
+      recipeTextString = recipeTextString.substr(0, recipeTextString.length - 77);
       var recipeTextArr = recipeTextString.split("   ");
       // add recipe steps to modal
       $("")
@@ -152,7 +162,7 @@ $("#displayed-modal").on("click", ".ingredients", function () {
   //var ingredientsArr = [];
   var ingredientsArr = JSON.parse(localStorage.getItem("ingredients"));
   // ingredientsArr = ingredientsArr.split(",");
-  $("#display-ingredients").css("background-color", "gray");
+  $("#display-ingredients").css("background-color", "rgb(77, 0, 77)");
 
   for (let i = 0; i < ingredientsArr.length; i++) {
 
@@ -175,8 +185,7 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   var ingredientsTitle = $(this).text();
   $("#ingredients-title").append(ingredientsTitle);
 
-$("#display-ingredients").css("background-color", "gray");
-  console.log(recipeFromLocalStorageObj)
+$("#display-ingredients").css("background-color", "rgb(77, 0, 77)");
   for (let i = 0; i < recipeFromLocalStorageObj.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
       
@@ -334,7 +343,6 @@ function getIngredients(recipeId) {
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
       // store array of ingredients pre-formatted per line
       ingredientArr.push("   " + (i + 1) + ".)  " + measureAmount + " " + measureUnit + " " + ingredient);
-      //console.log(ingredientArr)
     } // save ingredients from API call with recipe ID
     localStorage.setItem("ingredients", JSON.stringify(ingredientArr));
 
