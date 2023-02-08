@@ -22,7 +22,8 @@ body::-webkit-scrollbar{
 
 
 
-.hero {
+.hero,
+.navbar {
     background-image: linear-gradient(
         180deg,
         hsl(240deg 5% 18%) 0%,
@@ -49,12 +50,12 @@ form {
     margin: 1em;
 }
 
-a {
-    color: #025d21 !important;
+.result-heading {
+    display: none;
+    display:
 }
 
 img {
-    border-radius: 1em;
     box-shadow: 0 0 3px 3px #00000033;
 }
 
@@ -125,13 +126,11 @@ h4 {
     text-align: center;
 }
 
-/* main {
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background: rgba(0, 0, 0, 0.3)
-} */
+.card-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 
 .modal {
     max-width: 100%;
@@ -149,10 +148,6 @@ h4 {
     display: none !important;
 }
 
-.has-text-black:hover {
-    color: purple !important;
-}
-
 .result-card {
     background: rgba(0,0,0,0.5) !important;
     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
@@ -162,6 +157,7 @@ h4 {
     color: red;
 } */
 .has-text-black {
+    color: white !important;
     padding-left: 20px;
 }
 
