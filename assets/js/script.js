@@ -176,7 +176,7 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").append(ingredientsTitle);
 
 $("#display-ingredients").css("background-color", "gray");
-  console.log(recipeFromLocalStorageObj);
+  console.log(recipeFromLocalStorageObj)
   for (let i = 0; i < recipeFromLocalStorageObj.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
       
