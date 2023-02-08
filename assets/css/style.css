@@ -22,7 +22,8 @@ body::-webkit-scrollbar{
 
 
 
-.hero {
+.hero,
+.navbar {
     background-image: linear-gradient(
         180deg,
         hsl(240deg 5% 18%) 0%,
