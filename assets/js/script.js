@@ -151,9 +151,9 @@ $("#displayed-modal").on("click", ".ingredients", function () {
   //var ingredientsArr = [];
   var ingredientsArr = JSON.parse(localStorage.getItem("ingredients"));
   // ingredientsArr = ingredientsArr.split(",");
-  
+
   for (let i = 0; i < ingredientsArr.length; i++) {
-   
+
     var ingredientsText = $("<p>");
     ingredientsText.text(ingredientsArr[i]);
     $("#ingredientsrecipe").append(ingredientsText);
@@ -174,11 +174,11 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   $("#ingredients-title").append(ingredientsTitle);
 
   var ingredientsArr = JSON.parse(localStorage.getItem("ingredients"));
-  
- console.log(recipeFromLocalStorageObj)
+
+  console.log(recipeFromLocalStorageObj)
   for (let i = 0; i < recipeFromLocalStorageObj.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
-      for(let k = 0; k < ingredientArr.length; k++) {
+      for (let k = 0; k < ingredientArr.length; k++) {
         var ingredientsText = $("<p>");
         ingredientsText.text(ingredientsArr[k]);
         $("#ingredientsrecipe").append(ingredientsText);
@@ -242,7 +242,7 @@ function getRecipes() {
     url: recipeIdSearch,
     method: "GET",
   }).then(function (response) {
-    console.log(response)
+
     // Setting the recipe results card display
     var resultCard = $("<div>").addClass("card result-card has-background-black");
     var resultBody = $("<div>").addClass("card-body");
@@ -263,6 +263,8 @@ function getRecipes() {
       $(header).append(headerTitle);
       $(recipeCard).append(header, recipeImage);
       $(resultCardRow).append(recipeCard);
+      // set the credits at the bottom from json response
+      creditInfo.text(response.results[i].creditsText);
 
       // Event handler to display the recipe steps when the image is clicked
       recipeCard.click(function (e) {
@@ -271,12 +273,11 @@ function getRecipes() {
         $("#displayed-modal").addClass("is-active");
         var recipe = $("<h2>").addClass("recipe-modal-header").text(e.currentTarget.firstChild.innerText);
         $("#recipe-title").append(recipe);
-        
+
         for (let i = 0; i < response.results.length; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
             var recipeId = response.results[i].id;
-            creditInfo.text(response.results[i].creditsText);
             $("#recipe-id").text(recipeId);
             getIngredients(recipeId);
             for (k = 0; k < recipeLength; k++) {
@@ -333,11 +334,11 @@ function getIngredients(recipeId) {
       var measureAmount = recipeIdResponse.extendedIngredients[i].measures.metric.amount.toFixed(1);
       var measureUnit = recipeIdResponse.extendedIngredients[i].measures.metric.unitLong;
       // store array of ingredients pre-formatted per line
-      ingredientArr.push(i+1 + ".)  " + measureAmount + " " + measureUnit + " " + ingredient);
+      ingredientArr.push(i + 1 + ".)  " + measureAmount + " " + measureUnit + " " + ingredient);
     } // save ingredients from API call with recipe ID
-    localStorage.setItem("ingredients", JSON.stringify(ingredientArr));  
-    
-    
+    localStorage.setItem("ingredients", JSON.stringify(ingredientArr));
+
+
   })
 }
 
