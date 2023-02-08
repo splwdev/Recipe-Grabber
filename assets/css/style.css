@@ -47,8 +47,12 @@ button, input {
 }
 
 form {
+    padding-left: 5%;
     margin: 1em;
+    width: 90%;
 }
+
+
 
 .result-heading {
     display: none;
