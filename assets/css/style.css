@@ -22,7 +22,8 @@ body::-webkit-scrollbar{
 
 
 
-.hero {
+.hero,
+.navbar {
     background-image: linear-gradient(
         180deg,
         hsl(240deg 5% 18%) 0%,
@@ -47,10 +48,6 @@ button, input {
 
 form {
     margin: 1em;
-}
-
-a {
-    color: #025d21 !important;
 }
 
 .result-heading {
@@ -160,6 +157,7 @@ h4 {
     color: red;
 } */
 .has-text-black {
+    color: white !important;
     padding-left: 20px;
 }
 
