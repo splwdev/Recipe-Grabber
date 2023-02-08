@@ -5,6 +5,7 @@ var searchInput = $("#search-text");
 var searchBtn = $("#search-button");
 var recipeDisplay = $("#recipe-display");
 var saveModal = $("#saved-modal");
+var creditInfo = $(".credit-info-1");
 var apiKey = "";
 var recipeArr = [];
 var savedRecipes = localStorage.getItem("savedRecipes");
@@ -275,6 +276,7 @@ function getRecipes() {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
             var recipeId = response.results[i].id;
+            creditInfo.text(response.results[i].creditsText);
             $("#recipe-id").text(recipeId);
             getIngredients(recipeId);
             for (k = 0; k < recipeLength; k++) {
