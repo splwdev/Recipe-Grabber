@@ -13,19 +13,26 @@ var recipeSearch = "";
 var currentRecipe = [];
 var ingredientArr = [];
 
-
-// on scroll, drop the header back down
-$(window).scroll(function(event){
-  // event.preventDefault(); // removed this as it seems to work better
-  $("#slide-header").slideDown("slow");
-});
-
-// function that picks a random image for homescreen
+// function that picks a random image for homescreen backdrop on page load
+// placed at top of file as runs as soon as page loaded
 $(document).ready(function () {
   var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "roast chicken", "bbq", "lasagne"];
   var loadingBackground = Math.floor(Math.random() * images.length);
   recipeSearch = images[loadingBackground];
   unsplashImg();
+});
+
+// on scroll up, drop the header down - StackOverflow FTW !
+$(window).bind('mousewheel', function(event) {
+  if (event.originalEvent.wheelDelta >= 0) {
+      console.log('Scroll up');
+      $("#slide-header").slideDown("slow");
+  }
+  else {
+    // on scroll down, pull the header up - also happens in card populate func
+      console.log('Scroll down');
+      $("#slide-header").slideUp("slow");
+  }
 });
 
 // dark to light mode favicon change
