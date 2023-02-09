@@ -13,11 +13,17 @@ var recipeSearch = "";
 var currentRecipe = [];
 var ingredientArr = [];
 
-
-// on scroll, drop the header back down
-$(window).scroll(function(event){
-  // event.preventDefault(); // removed this as it seems to work better
-  $("#slide-header").slideDown("slow");
+// on scroll up, drop the header down
+$(window).bind('mousewheel', function(event) {
+  if (event.originalEvent.wheelDelta >= 0) {
+      console.log('Scroll up');
+      $("#slide-header").slideDown("slow");
+  }
+  else {
+    // on scroll down, pull the header up - also happens in card populate func
+      console.log('Scroll down');
+      $("#slide-header").slideUp("slow");
+  }
 });
 
 // function that picks a random image for homescreen
