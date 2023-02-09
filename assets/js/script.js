@@ -14,9 +14,9 @@ var currentRecipe = [];
 var ingredientArr = [];
 
 
-// on scroll, let the interval function know the user has scrolled
+// on scroll, drop the header back down
 $(window).scroll(function(event){
-  event.preventDefault();
+  // event.preventDefault(); // removed this as it seems to work better
   $("#slide-header").slideDown("slow");
 });
 
@@ -268,7 +268,7 @@ function getRecipes() {
       $(".card-body").text("Sorry! No recipe results found -  Please try another search").addClass("no-results-text");
       return;
     }
-    // slide header up when cards populate;
+    // slide header up when cards populate
     $("#slide-header").slideUp("slow");
     for (let i = 0; i < response.results.length; i++) {
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
