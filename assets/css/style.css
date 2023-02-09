@@ -7,7 +7,9 @@ html {
     overflow-y: scroll;
     height: 100vh;
 }
-
+#top-nav {
+    display: block;
+}
 main {
     height: 100vh;
     /* / position:fixed; */
@@ -20,10 +22,9 @@ body::-webkit-scrollbar{
     display: none;
 }
 
-
-
 .hero,
-.navbar {
+.navbar,
+.modal-card-head {
     background-image: linear-gradient(
         180deg,
         hsl(240deg 5% 18%) 0%,
@@ -168,20 +169,4 @@ h4 {
 
 .modal-card-title, .recipe-modal-header {
     color: white;
-}
-
-.modal-card-head {
-    background-image: linear-gradient(
-        180deg,
-        hsl(240deg 5% 18%) 0%,
-        hsl(261deg 16% 21%) 6%,
-        hsl(279deg 27% 24%) 21%,
-        hsl(299deg 37% 27%) 55%,
-        hsl(318deg 47% 30%) 80%,
-        hsl(338deg 58% 33%) 91%,
-        hsl(357deg 69% 35%) 96%,
-        hsl(16deg 79% 38%) 99%,
-        hsl(35deg 90% 41%) 100%,
-        hsl(55deg 100% 44%) 100%
-    );
 }
