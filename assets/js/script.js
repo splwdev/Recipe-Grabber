@@ -13,6 +13,15 @@ var recipeSearch = "";
 var currentRecipe = [];
 var ingredientArr = [];
 
+// function that picks a random image for homescreen backdrop on page load
+// placed at top of file as runs as soon as page loaded
+$(document).ready(function () {
+  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "roast chicken", "bbq", "lasagne"];
+  var loadingBackground = Math.floor(Math.random() * images.length);
+  recipeSearch = images[loadingBackground];
+  unsplashImg();
+});
+
 // on scroll up, drop the header down - StackOverflow FTW !
 $(window).bind('mousewheel', function(event) {
   if (event.originalEvent.wheelDelta >= 0) {
@@ -24,14 +33,6 @@ $(window).bind('mousewheel', function(event) {
       console.log('Scroll down');
       $("#slide-header").slideUp("slow");
   }
-});
-
-// function that picks a random image for homescreen
-$(document).ready(function () {
-  var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "roast chicken", "bbq", "lasagne"];
-  var loadingBackground = Math.floor(Math.random() * images.length);
-  recipeSearch = images[loadingBackground];
-  unsplashImg();
 });
 
 // dark to light mode favicon change
