@@ -14,6 +14,12 @@ var currentRecipe = [];
 var ingredientArr = [];
 
 
+// on scroll, let the interval function know the user has scrolled
+$(window).scroll(function(event){
+  event.preventDefault();
+  $("#slide-header").slideDown("slow");
+});
+
 // function that picks a random image for homescreen
 $(document).ready(function () {
   var images = ["strawberry", "banana", "beans", "steak", "salad", "pizza", "burger", "roast chicken", "bbq", "lasagne"];
@@ -117,8 +123,8 @@ $("#saved-modal").on("click", ".recipeUrl", function () {
   currentRecipe = [];
   $("#saved-recipe-title").empty();
   $("#display-saved-recipe").empty();
-     //modal background color
-     $("#display-saved-recipe").css("background-color", "black");
+  //modal background color
+  $("#display-saved-recipe").css("background-color", "black");
   var currentTitle = $(this).text();
   currentRecipe.push(currentTitle);
   recipeArr.forEach(function (e) {
@@ -185,17 +191,17 @@ $("#recipe-modal").on("click", ".ingredients", function () {
   var ingredientsTitle = $(this).text();
   $("#ingredients-title").append(ingredientsTitle);
 
-$("#display-ingredients").css("background-color", "rgb(77, 0, 77)");
+  $("#display-ingredients").css("background-color", "rgb(77, 0, 77)");
   for (let i = 0; i < recipeFromLocalStorageObj.length; i++) {
     if (recipeArr[i].recipeTitle.includes(currentRecipe)) {
-      
-        var ingredientStep = recipeFromLocalStorageObj[i].ingredients.toString();
-        ingredientStep = ingredientStep.split("   ");
-        for (let k = 0; k < ingredientStep.length; k++) {
-          var ingredientsText = $("<p>").css("color", "white");
-          ingredientsText.text(ingredientStep[k]);
-          $("#ingredientsrecipe").append(ingredientsText);
-        }
+
+      var ingredientStep = recipeFromLocalStorageObj[i].ingredients.toString();
+      ingredientStep = ingredientStep.split("   ");
+      for (let k = 0; k < ingredientStep.length; k++) {
+        var ingredientsText = $("<p>").css("color", "white");
+        ingredientsText.text(ingredientStep[k]);
+        $("#ingredientsrecipe").append(ingredientsText);
+      }
     }
   }
   // add back button and ingredients button to recipe steps
@@ -262,6 +268,8 @@ function getRecipes() {
       $(".card-body").text("Sorry! No recipe results found -  Please try another search").addClass("no-results-text");
       return;
     }
+    // slide header up when cards populate;
+    $("#slide-header").slideUp("slow");
     for (let i = 0; i < response.results.length; i++) {
       var recipeCard = $("<div>").addClass("col-lg-3 col-md-5 m-2 p-0 card");
       var recipeImage = $("<img>").attr("src", response.results[i].image);
@@ -283,11 +291,14 @@ function getRecipes() {
 
         for (let i = 0; i < response.results.length; i++) {
           if (response.results[i].title === e.currentTarget.firstChild.innerText) {
+
+
             var recipeLength = response.results[i].analyzedInstructions[0].steps.length;
             var recipeId = response.results[i].id;
             $("#displayed-recipe").css("background-color", "black");
             $("#recipe-id").text(recipeId);
             getIngredients(recipeId);
+
             for (k = 0; k < recipeLength; k++) {
               var recipeSteps = $("<p>").css("color", "white");
               // putting a large space at the start of each recipe step to separate on later
