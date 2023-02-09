@@ -13,7 +13,7 @@ var recipeSearch = "";
 var currentRecipe = [];
 var ingredientArr = [];
 
-// on scroll up, drop the header down
+// on scroll up, drop the header down - StackOverflow FTW !
 $(window).bind('mousewheel', function(event) {
   if (event.originalEvent.wheelDelta >= 0) {
       console.log('Scroll up');
